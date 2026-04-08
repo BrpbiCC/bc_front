@@ -1,0 +1,185 @@
+<div class="db-wrapper">
+
+  <!-- ── Encabezado ──────────────────────────────────────────── -->
+  <div class="db-header">
+    <div>
+      <h1 class="db-title">Dashboard</h1>
+      <p class="db-subtitle">Resumen general de activos · Abril 2026</p>
+    </div>
+    <span class="chip-live">
+      <span class="live-dot"></span> En tiempo real
+    </span>
+  </div>
+
+  <!-- ── Tarjetas métricas ────────────────────────────────────── -->
+  <div class="metrics-grid">
+    <mat-card *ngFor="let m of metricas" class="metric-card mat-elevation-z0" [ngClass]="'border-' + m.color">
+      <mat-card-content class="metric-content">
+        <div class="metric-top">
+          <span class="metric-label">{{ m.label }}</span>
+          <mat-icon class="metric-icon" [ngClass]="'icon-' + m.color">{{ m.icono }}</mat-icon>
+        </div>
+        <p class="metric-value">{{ m.valor }}</p>
+        <p class="metric-sub">{{ m.subvalor }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- ── Fila 1: Barras + Donut ───────────────────────────────── -->
+  <div class="charts-row">
+
+    <mat-card class="chart-card mat-elevation-z0">
+      <mat-card-header>
+        <mat-card-title class="chart-title">Visitas por mes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="legend-row">
+          <span class="leg-item"><span class="leg-dot" style="background:#b5d4f4"></span>2025</span>
+          <span class="leg-item"><span class="leg-dot" style="background:#185FA5"></span>2026</span>
+        </div>
+        <div class="chart-container" style="height:210px;">
+          <canvas id="barChart"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card mat-elevation-z0">
+      <mat-card-header>
+        <mat-card-title class="chart-title">Estado de Tenants</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-container" style="height:170px;">
+          <canvas id="donutChart"></canvas>
+        </div>
+        <div class="donut-stats">
+          <div class="donut-stat">
+            <span class="ds-dot ds-activo"></span>
+            <div>
+              <p class="ds-val">{{ tenantsPorEstado.activos }}</p>
+              <p class="ds-lbl">Activos ({{ pctActivos() }}%)</p>
+            </div>
+          </div>
+          <div class="donut-stat">
+            <span class="ds-dot ds-inactivo"></span>
+            <div>
+              <p class="ds-val">{{ tenantsPorEstado.inactivos }}</p>
+              <p class="ds-lbl">Inactivos ({{ pctInactivos() }}%)</p>
+            </div>
+          </div>
+          <div class="donut-stat">
+            <span class="ds-dot ds-mant"></span>
+            <div>
+              <p class="ds-val">{{ tenantsPorEstado.mantenimiento }}</p>
+              <p class="ds-lbl">Mant. ({{ pctMantenimiento() }}%)</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <!-- ── Fila 2: Línea + Categorías ──────────────────────────── -->
+  <div class="charts-row charts-row--32">
+
+    <mat-card class="chart-card mat-elevation-z0">
+      <mat-card-header>
+        <mat-card-title class="chart-title">Pedidos vs Tickets (2026)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="legend-row">
+          <span class="leg-item"><span class="leg-dot" style="background:#185FA5"></span>Pedidos</span>
+          <span class="leg-item"><span class="leg-dot" style="background:#E24B4A"></span>Tickets</span>
+        </div>
+        <div class="chart-container" style="height:185px;">
+          <canvas id="lineChart"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card mat-elevation-z0">
+      <mat-card-header>
+        <mat-card-title class="chart-title">Total por categoría</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="cat-list">
+          <div class="cat-row" *ngFor="let c of categorias">
+            <div class="cat-info">
+              <mat-icon class="cat-icon" [style.color]="c.color">{{ c.icono }}</mat-icon>
+              <span class="cat-name">{{ c.nombre }}</span>
+            </div>
+            <div class="cat-right">
+              <span class="cat-num">{{ c.valor }}</span>
+              <mat-progress-bar
+                mode="determinate"
+                [value]="c.pct"
+                [ngClass]="c.pbClass">
+              </mat-progress-bar>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <!-- ── Tabla activos recientes ──────────────────────────────── -->
+  <mat-card class="table-card mat-elevation-z0">
+    <mat-card-header>
+      <mat-card-title class="chart-title">Registros recientes</mat-card-title>
+      <span class="spacer"></span>
+      <button mat-stroked-button color="primary" class="ver-btn">
+        <mat-icon>open_in_new</mat-icon> Ver todos
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="table-scroll">
+        <table mat-table [dataSource]="registrosRecientes" class="db-table">
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let a"><code class="id-code">{{ a.id }}</code></td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let a">{{ a.nombre }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef>Categoría</th>
+            <td mat-cell *matCellDef="let a">
+              <span class="cat-badge" [ngClass]="getCategoriaClass(a.categoria)">{{ a.categoria }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let a">
+              <span class="badge" [ngClass]="getBadgeClass(a.estado)">{{ a.estado }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ubicacion">
+            <th mat-header-cell *matHeaderCellDef>Ubicación</th>
+            <td mat-cell *matCellDef="let a">
+              <span class="ubicacion-txt">
+                <mat-icon class="loc-icon">location_on</mat-icon>{{ a.ubicacion }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef>Fecha</th>
+            <td mat-cell *matCellDef="let a" class="fecha-txt">{{ a.fecha }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnasTabla;" class="db-row"></tr>
+
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

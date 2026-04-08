@@ -1,0 +1,101 @@
+.page-container {
+  padding: 2rem;
+}
+.page-header {
+  margin-bottom: 1.75rem;
+}
+.page-header h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.config-card {
+  background-color: var(--surface-lowest);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.config-card h3 {
+  margin: 0 0 1.25rem 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+.form-group label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 5px;
+  background-color: var(--hover-overlay-1);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus {
+  border-color: var(--primary);
+}
+.form-group input::placeholder {
+  color: var(--text-dark);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.btn-secondary:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}

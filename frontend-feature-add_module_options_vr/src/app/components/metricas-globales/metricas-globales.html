@@ -1,0 +1,60 @@
+<div class="mg-wrapper">
+
+  <div class="mg-header">
+    <div>
+      <h1 class="mg-title">Métricas Globales</h1>
+      <p class="mg-subtitle">Vista general de todos los tenants · Abril 2026</p>
+    </div>
+    <span class="chip-live">
+      <span class="live-dot"></span> En tiempo real
+    </span>
+  </div>
+
+  <!-- Tarjetas resumen -->
+  <div class="metrics-grid">
+    <div class="metric-card" *ngFor="let m of metricas" [ngClass]="'border-' + m.color">
+      <span class="metric-icon">{{ m.icono }}</span>
+      <div>
+        <p class="metric-label">{{ m.label }}</p>
+        <p class="metric-value">{{ m.valor }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla actividad por tenant -->
+  <div class="table-card">
+    <div class="table-header">
+      <h2 class="table-title">Actividad por Tenant</h2>
+    </div>
+    <table class="mg-table">
+      <thead>
+        <tr>
+          <th>Tenant</th>
+          <th>Usuarios</th>
+          <th>Tickets abiertos</th>
+          <th>Uptime</th>
+          <th>Carga</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of tenantActividad">
+          <td class="nombre-cell">{{ t.nombre }}</td>
+          <td>{{ t.usuarios }}</td>
+          <td>{{ t.tickets }}</td>
+          <td class="uptime-cell">{{ t.uptime }}</td>
+          <td>
+            <div class="carga-bar-wrapper">
+              <div
+                class="carga-bar"
+                [ngClass]="getCargaClass(t.carga)"
+                [style.width.%]="t.carga">
+              </div>
+              <span class="carga-pct">{{ t.carga }}%</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

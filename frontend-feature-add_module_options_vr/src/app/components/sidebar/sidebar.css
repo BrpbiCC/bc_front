@@ -1,0 +1,246 @@
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  height: 100vh;
+  background-color: var(--surface);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width 0.3s ease, min-width 0.3s ease;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar.collapsed {
+  width: 72px;
+  min-width: 72px;
+}
+
+.sb-logo {
+  height: var(--topbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: none;
+  flex-shrink: 0;
+  padding: 0;
+  transition: padding 0.3s ease;
+}
+
+.sidebar.collapsed .sb-logo {
+  padding: 0;
+}
+
+.logo-icon {
+  height: 40px;
+  width: auto;
+  flex-shrink: 0;
+  transition: height 0.3s ease;
+}
+
+.sidebar.collapsed .logo-icon {
+  height: 32px;
+}
+
+.logo-light {
+  display: block;
+}
+
+.logo-dark {
+  display: none;
+}
+
+[data-theme='dark'] .logo-light {
+  display: none;
+}
+
+[data-theme='dark'] .logo-dark {
+  display: block;
+}
+
+.sb-nav {
+  flex: 1;
+  padding: 16px 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sb-nav::-webkit-scrollbar {
+  width: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+  border-right: 4px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar:not([data-anim-key="0"]) .nav-item {
+  animation: navItemAppear 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) backwards;
+}
+
+.sidebar[data-anim-key="0"] .nav-item {
+  animation: navItemAppearInitial 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) backwards;
+}
+
+@keyframes navItemAppearInitial {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px) scale(0.9);
+  }
+  40% {
+    transform: translateX(5px) scale(1.01);
+  }
+  70% {
+    transform: translateX(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes navItemAppear {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px) scale(0.9);
+  }
+  40% {
+    transform: translateX(5px) scale(1.01);
+  }
+  70% {
+    transform: translateX(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 12px;
+  border-right: none;
+}
+
+.nav-item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
+.nav-item:hover {
+  background-color: var(--hover-bg);
+  color: var(--primary);
+  text-shadow: 0 0 1px var(--primary);
+}
+
+.nav-item.active {
+  background-color: var(--surface-lowest);
+  color: var(--primary, var(--primary)) !important;
+  font-weight: 600;
+  border-right: 4px solid var(--primary) !important;
+  box-shadow: var(--shadow-card);
+}
+
+.sidebar.collapsed .nav-item.active {
+  border-right: none;
+}
+
+.nav-item span {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar.collapsed .nav-item span {
+  opacity: 0;
+  width: 0;
+  display: none;
+}
+
+.nav-separator {
+  height: 1px;
+  background-color: var(--border);
+  margin: 8px 0;
+  transition: margin 0.3s ease;
+}
+
+.sidebar.collapsed .nav-separator {
+  margin: 8px 4px;
+}
+
+.sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.sidebar.collapsed .sidebar-toggle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sidebar-toggle:hover {
+  background-color: var(--hover-bg);
+  color: var(--primary);
+}
+
+.sidebar-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+    z-index: 1000;
+    transform: translateX(0);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  }
+
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+    opacity: 0;
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+  }
+}
+
+@media (min-aspect-ratio: 3/4) and (max-width: 1024px) {
+  .sidebar {
+    position: relative;
+    transform: none;
+    opacity: 1;
+  }
+
+  .sidebar.collapsed {
+    transform: none;
+    width: 72px;
+    min-width: 72px;
+    opacity: 1;
+  }
+}

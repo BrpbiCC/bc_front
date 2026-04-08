@@ -1,0 +1,185 @@
+/* =========================
+   TEMA CLARO (POR DEFECTO)
+ ========================= */
+:root {
+  /* Colores de marca */
+  --primary: #f26522;
+  --primary-hover: #d9551d;
+  --primary-light: #ff7a3c;
+  --primary-dim: rgba(242, 101, 34, 0.12);
+
+  /* Dimensiones */
+  --sidebar-width: 240px;
+  --topbar-height: 60px;
+
+  /* Estados */
+  --error: #ba1a1a;
+  --error-light: #ff6b6b;
+  --error-alt: #e74c3c;
+  --success: #006e25;
+  --success-light: #2ecc71;
+  --success-alt: #4caf50;
+  --warning: #f1c40f;
+  --warning-alt: #ffa726;
+  --info: #3498db;
+  --neutral-high: #ba1830;
+
+  /* Superficies y fondos */
+  --surface: #f8fafc;
+  --surface-low: #f1f5f9;
+  --surface-lowest: #ffffff;
+
+  /* Textos */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --text-light: #cbd5e1;
+  --text-lighter: #bbb;
+  --text-dark: #444;
+  --text-white: #ffffff;
+
+  /* Bordes */
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --border-dark: #141414;
+
+  /* Interacciones */
+  --hover-bg: rgba(242, 101, 34, 0.04);
+  --hover-bg-light: rgba(242, 101, 34, 0.08);
+  --hover-bg-lighter: rgba(242, 101, 34, 0.12);
+  --hover-overlay-1: rgba(255, 255, 255, 0.02);
+  --hover-overlay-2: rgba(255, 255, 255, 0.03);
+  --hover-overlay-3: rgba(255, 255, 255, 0.05);
+  --hover-overlay-4: rgba(255, 255, 255, 0.06);
+  --hover-overlay-5: rgba(255, 255, 255, 0.07);
+  --hover-overlay-6: rgba(255, 255, 255, 0.14);
+  --hover-overlay-7: rgba(255, 255, 255, 0.15);
+  --hover-overlay-8: rgba(255, 255, 255, 0.25);
+
+  /* Status specifics */
+  --status-pending-bg: rgba(241, 196, 15, 0.12);
+  --status-pending-text: #f1c40f;
+  --status-pending-border: rgba(241, 196, 15, 0.25);
+
+  --status-done-bg: rgba(46, 204, 113, 0.12);
+  --status-done-text: #2ecc71;
+  --status-done-border: rgba(46, 204, 113, 0.25);
+
+  --status-scheduled-bg: rgba(52, 152, 219, 0.12);
+  --status-scheduled-text: #3498db;
+  --status-scheduled-border: rgba(52, 152, 219, 0.25);
+
+  --status-high-bg: rgba(231, 76, 60, 0.15);
+  --status-high-text: #e74c3c;
+  --status-high-border: rgba(231, 76, 60, 0.3);
+
+  --status-medium-bg: rgba(241, 196, 15, 0.12);
+  --status-medium-text: #f1c40f;
+  --status-medium-border: rgba(241, 196, 15, 0.25);
+
+  --status-low-bg: rgba(255, 255, 255, 0.06);
+  --status-low-text: #888;
+
+  --status-online-text: #2ecc71;
+  --status-online-glow: rgba(46, 204, 113, 0.6);
+  --status-offline-text: #555;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 10px rgba(0, 0, 0, 0.05);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-soft: 4px 0 10px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================
+   TEMA OSCURO
+========================= */
+[data-theme='dark'] {
+  /* Colores de marca */
+  --primary: #ff7a3c;
+  --primary-hover: #ff8f5a;
+  --primary-light: #ff7a3c;
+  --primary-dim: rgba(255, 122, 60, 0.12);
+
+  /* Estados */
+  --error: #ff6b6b;
+  --error-light: #ff6b6b;
+  --error-alt: #e74c3c;
+  --success: #4caf50;
+  --success-light: #4caf50;
+  --success-alt: #4caf50;
+  --warning: #ffa726;
+  --warning-alt: #ffa726;
+  --info: #3498db;
+  --neutral-high: #ff4d6d;
+
+  /* Superficies y fondos */
+  --surface: #0f172a;
+  --surface-low: #162032;
+  --surface-lowest: #1e293b;
+
+  /* Textos */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-light: #cbd5e1;
+  --text-lighter: #bbb;
+  --text-dark: #ddd;
+  --text-white: #ffffff;
+
+  /* Bordes */
+  --border: #334155;
+  --border-light: #475569;
+  --border-dark: #141414;
+
+  /* Interacciones */
+  --hover-bg: rgba(255, 122, 60, 0.04);
+  --hover-bg-light: rgba(255, 122, 60, 0.08);
+  --hover-bg-lighter: rgba(255, 122, 60, 0.12);
+  --hover-overlay-1: rgba(255, 255, 255, 0.02);
+  --hover-overlay-2: rgba(255, 255, 255, 0.03);
+  --hover-overlay-3: rgba(255, 255, 255, 0.05);
+  --hover-overlay-4: rgba(255, 255, 255, 0.06);
+  --hover-overlay-5: rgba(255, 255, 255, 0.07);
+  --hover-overlay-6: rgba(255, 255, 255, 0.14);
+  --hover-overlay-7: rgba(255, 255, 255, 0.15);
+  --hover-overlay-8: rgba(255, 255, 255, 0.25);
+
+  /* Status specifics */
+  --status-pending-bg: rgba(241, 196, 15, 0.12);
+  --status-pending-text: #f1c40f;
+  --status-pending-border: rgba(241, 196, 15, 0.25);
+
+  --status-done-bg: rgba(46, 204, 113, 0.12);
+  --status-done-text: #2ecc71;
+  --status-done-border: rgba(46, 204, 113, 0.25);
+
+  --status-scheduled-bg: rgba(52, 152, 219, 0.12);
+  --status-scheduled-text: #3498db;
+  --status-scheduled-border: rgba(52, 152, 219, 0.25);
+
+  --status-high-bg: rgba(231, 76, 60, 0.15);
+  --status-high-text: #e74c3c;
+  --status-high-border: rgba(231, 76, 60, 0.3);
+
+  --status-medium-bg: rgba(241, 196, 15, 0.12);
+  --status-medium-text: #f1c40f;
+  --status-medium-border: rgba(241, 196, 15, 0.25);
+
+  --status-low-bg: rgba(255, 255, 255, 0.06);
+  --status-low-text: #888;
+
+  --status-online-text: #2ecc71;
+  --status-online-glow: rgba(46, 204, 113, 0.6);
+  --status-offline-text: #555;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 10px rgba(0, 0, 0, 0.05);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-soft: 4px 0 10px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.05);
+}

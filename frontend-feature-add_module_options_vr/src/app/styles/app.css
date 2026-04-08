@@ -1,0 +1,125 @@
+@import './colors.css';
+
+body {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-family: system-ui, sans-serif;
+}
+
+/* Domando los componentes de Angular Material */
+.mat-mdc-card {
+  background-color: var(--surface-lowest) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important;
+}
+
+.mat-mdc-card .mat-mdc-card-title {
+  color: var(--text-primary) !important;
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.mat-mdc-card .mat-mdc-card-subtitle {
+  color: var(--text-muted) !important;
+}
+
+.mat-mdc-card .mat-icon {
+  color: var(--primary);
+}
+
+/* Botón base */
+.btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+  font-size: 0.875rem;
+  font-family: inherit;
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Botón primary */
+.btn-primary {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--primary) !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 16px !important;
+  border-radius: 7px !important;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+.btn-primary svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Botón secondary */
+.btn-secondary {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border) !important;
+  padding: 8px 16px !important;
+  border-radius: 7px !important;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  background-color: var(--hover-bg) !important;
+}
+
+/* Cards */
+.card {
+  background-color: var(--surface-lowest);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* Secciones */
+.section {
+  background-color: var(--surface-low);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* Inputs */
+.input {
+  background-color: var(--surface-lowest);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* Hover genérico */
+.hoverable:hover {
+  background-color: var(--hover-bg);
+}

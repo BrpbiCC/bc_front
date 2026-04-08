@@ -1,0 +1,97 @@
+.page-container {
+  padding: 2rem;
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+.page-header h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.select-filter {
+  background-color: var(--surface-lowest);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.8rem;
+  border-radius: 7px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+}
+
+.table-container {
+  background-color: var(--surface-lowest);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table thead th {
+  background-color: var(--hover-overlay-2);
+  padding: 0.85rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table tbody td {
+  padding: 0.9rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.data-table tbody tr:hover {
+  background-color: var(--hover-overlay-1);
+}
+
+.mono {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+}
+.muted {
+  color: var(--text-muted) !important;
+}
+
+.prio {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.prio.high {
+  background: var(--status-high-bg);
+  color: var(--status-high-text);
+  border: 1px solid var(--status-high-border);
+}
+.prio.medium {
+  background: var(--status-medium-bg);
+  color: var(--status-medium-text);
+  border: 1px solid var(--status-medium-border);
+}
+.prio.low {
+  background: var(--status-low-bg);
+  color: var(--status-low-text);
+  border: 1px solid var(--border);
+}

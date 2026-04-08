@@ -1,0 +1,61 @@
+<div class="tenants-wrapper">
+
+  <div class="tenants-header">
+    <div>
+      <h1 class="tenants-title">Tenants</h1>
+      <p class="tenants-subtitle">Gestión global de organizaciones</p>
+    </div>
+    <button class="btn-nuevo">
+      + Nuevo Tenant
+    </button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-label">Total Tenants</span>
+      <span class="stat-value">{{ tenants.length }}</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Activos</span>
+      <span class="stat-value stat-activo">3</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Inactivos</span>
+      <span class="stat-value stat-inactivo">1</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">En Mantenimiento</span>
+      <span class="stat-value stat-mant">1</span>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <table class="tenants-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Plan</th>
+          <th>Usuarios</th>
+          <th>Estado</th>
+          <th>Fecha alta</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of tenants">
+          <td><code class="id-code">{{ t.id }}</code></td>
+          <td class="nombre-cell">{{ t.nombre }}</td>
+          <td><span class="plan-badge" [ngClass]="getPlanClass(t.plan)">{{ t.plan }}</span></td>
+          <td>{{ t.usuarios }}</td>
+          <td><span class="estado-badge" [ngClass]="getEstadoClass(t.estado)">{{ t.estado }}</span></td>
+          <td class="fecha-cell">{{ t.fecha }}</td>
+          <td>
+            <button class="btn-accion">Ver</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

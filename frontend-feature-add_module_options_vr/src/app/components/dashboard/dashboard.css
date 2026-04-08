@@ -1,0 +1,381 @@
+/* ══════════════════════════════════════════════════
+   DASHBOARD — Estilos
+   ══════════════════════════════════════════════════ */
+
+.db-wrapper {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Encabezado ──────────────────────────────────── */
+.db-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.db-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.db-subtitle {
+  font-size: 13px;
+  color: #888;
+  margin: 3px 0 0;
+}
+
+.chip-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #0F6E56;
+  background: #E1F5EE;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1D9E75;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ── Grid métricas ───────────────────────────────── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 1200px) { .metrics-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px)  { .metrics-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.metric-card {
+  border-radius: 12px !important;
+  border: 1px solid #e8e8e8 !important;
+  border-left-width: 3px !important;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08) !important;
+}
+
+.border-primary  { border-left-color: #185FA5 !important; }
+.border-accent   { border-left-color: #1D9E75 !important; }
+.border-warn     { border-left-color: #E24B4A !important; }
+.border-success  { border-left-color: #639922 !important; }
+.border-info     { border-left-color: #534AB7 !important; }
+.border-purple   { border-left-color: #D4537E !important; }
+
+.metric-content {
+  padding: 14px 16px 14px !important;
+}
+
+.metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #888;
+  font-weight: 500;
+}
+
+.metric-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  opacity: 0.75;
+}
+
+.icon-primary  { color: #185FA5; }
+.icon-accent   { color: #1D9E75; }
+.icon-warn     { color: #E24B4A; }
+.icon-success  { color: #639922; }
+.icon-info     { color: #534AB7; }
+.icon-purple   { color: #D4537E; }
+
+.metric-value {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: -0.5px;
+}
+
+.metric-sub {
+  font-size: 11px;
+  color: #aaa;
+  margin: 0;
+}
+
+/* ── Filas de gráficos ───────────────────────────── */
+.charts-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+.charts-row--32 {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+}
+
+@media (max-width: 900px) {
+  .charts-row,
+  .charts-row--32 { grid-template-columns: 1fr; }
+}
+
+.chart-card {
+  border-radius: 12px !important;
+  border: 1px solid #e8e8e8 !important;
+}
+
+.chart-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+/* ── Leyendas ────────────────────────────────────── */
+.legend-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #888;
+}
+
+.leg-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Donut stats ─────────────────────────────────── */
+.donut-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 14px;
+}
+
+.donut-stat {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.ds-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.ds-activo   { background: #185FA5; }
+.ds-inactivo { background: #E24B4A; }
+.ds-mant     { background: #EF9F27; }
+
+.ds-val {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ds-lbl {
+  font-size: 11px;
+  color: #aaa;
+  margin: 0;
+}
+
+/* ── Lista categorías ────────────────────────────── */
+.cat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 4px;
+}
+
+.cat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cat-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 130px;
+}
+
+.cat-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.cat-name {
+  font-size: 13px;
+  color: #444;
+  font-weight: 500;
+}
+
+.cat-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cat-num {
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 46px;
+  text-align: right;
+}
+
+mat-progress-bar {
+  flex: 1;
+  border-radius: 4px !important;
+}
+
+/* Progress bar colors — Angular Material MDC */
+.pb-primary  ::ng-deep .mdc-linear-progress__bar-inner { border-color: #185FA5 !important; }
+.pb-green    ::ng-deep .mdc-linear-progress__bar-inner { border-color: #639922 !important; }
+.pb-amber    ::ng-deep .mdc-linear-progress__bar-inner { border-color: #BA7517 !important; }
+.pb-purple   ::ng-deep .mdc-linear-progress__bar-inner { border-color: #534AB7 !important; }
+.pb-pink     ::ng-deep .mdc-linear-progress__bar-inner { border-color: #D4537E !important; }
+
+/* ── Tabla ───────────────────────────────────────── */
+.table-card {
+  border-radius: 12px !important;
+  border: 1px solid #e8e8e8 !important;
+}
+
+.table-card mat-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.spacer { flex: 1; }
+
+.ver-btn {
+  font-size: 12px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+}
+
+.ver-btn mat-icon {
+  font-size: 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin-right: 4px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.db-table {
+  width: 100%;
+  font-size: 13px;
+}
+
+.db-table th {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #aaa !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.db-row:hover { background: #f7f8fc; }
+
+.id-code {
+  font-family: monospace;
+  font-size: 12px;
+  background: #f0f2f8;
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+
+.ubicacion-txt {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #666;
+}
+
+.loc-icon {
+  font-size: 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+  color: #bbb;
+}
+
+.fecha-txt { color: #aaa; }
+
+/* ── Badges estado ───────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge-activo   { background: #EAF3DE; color: #3B6D11; }
+.badge-inactivo { background: #FCEBEB; color: #A32D2D; }
+.badge-mant     { background: #FAEEDA; color: #854F0B; }
+
+/* ── Badges categoría ────────────────────────────── */
+.cat-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.cat-tenant     { background: #E6F1FB; color: #185FA5; }
+.cat-ticket  { background: #FAEEDA; color: #854F0B; }
+.cat-pedido  { background: #EAF3DE; color: #3B6D11; }
+.cat-usuario { background: #FBEAF0; color: #993556; }
+.cat-local   { background: #EEEDFE; color: #534AB7; }

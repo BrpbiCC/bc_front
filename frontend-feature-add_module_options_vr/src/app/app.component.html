@@ -1,0 +1,25 @@
+<ng-container *ngIf="isLoginRoute(); else appShell">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #appShell>
+  <div class="shell">
+    <app-sidebar *ngIf="!sidebarHidden" [collapsed]="sidebarCollapsed" (collapseChange)="sidebarCollapsed = $event"></app-sidebar>
+    <div class="main" [class.sidebar-collapsed]="sidebarCollapsed">
+      <app-topbar></app-topbar>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <button 
+      class="sidebar-toggle-float" 
+      *ngIf="sidebarCollapsed && !sidebarHidden" 
+      (click)="showSidebar()"
+      title="Mostrar sidebar"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+  </div>
+</ng-template>

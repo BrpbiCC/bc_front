@@ -1,0 +1,134 @@
+.page-container {
+  padding: 2rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.page-header h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-primary svg {
+  width: 14px;
+  height: 14px;
+}
+
+.table-container {
+  background-color: var(--surface-lowest);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table thead th {
+  background-color: var(--hover-overlay-2);
+  padding: 0.85rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table tbody td {
+  padding: 0.9rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.data-table tbody tr:hover {
+  background-color: var(--hover-overlay-1);
+}
+
+.muted {
+  color: var(--text-muted) !important;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge.operativo {
+  background-color: var(--status-done-bg);
+  color: var(--status-done-text);
+  border: 1px solid var(--status-done-border);
+}
+
+.status-badge.mantenimiento {
+  background-color: var(--status-medium-bg);
+  color: var(--status-medium-text);
+  border: 1px solid var(--status-medium-border);
+}
+
+.status-badge.alerta {
+  background-color: var(--status-high-bg);
+  color: var(--status-high-text);
+  border: 1px solid var(--status-high-border);
+}
+
+.btn-icon-sm {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-icon-sm:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--primary-dim);
+}
+
+.btn-icon-sm svg {
+  width: 14px;
+  height: 14px;
+}

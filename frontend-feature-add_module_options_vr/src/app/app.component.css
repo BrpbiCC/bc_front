@@ -1,0 +1,59 @@
+.shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  transition: margin-left 0.3s ease;
+}
+
+.main.sidebar-collapsed {
+  margin-left: 0;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--surface);
+}
+
+.sidebar-toggle-float {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 8px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s, padding 0.2s;
+  box-shadow: var(--shadow-lg);
+}
+
+.sidebar-toggle-float:hover {
+  opacity: 1;
+  padding-left: 12px;
+}
+
+.sidebar-toggle-float svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1024px) {
+  .sidebar-toggle-float {
+    display: block;
+  }
+}

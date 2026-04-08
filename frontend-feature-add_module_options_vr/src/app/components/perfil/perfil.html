@@ -1,0 +1,47 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2>Ajustes del Sistema</h2>
+  </div>
+
+  <div class="config-grid">
+    <div class="config-card">
+      <h3>Perfil del Usuario</h3>
+
+      <div class="form-group">
+        <label for="nombre">Nombre a mostrar</label>
+        <input id="nombre" type="text" [(ngModel)]="nombre" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input id="email" type="email" [(ngModel)]="email" />
+      </div>
+
+      <button class="btn-primary" (click)="guardar()">Guardar Cambios</button>
+    </div>
+
+    <div class="config-card">
+      <h3>Seguridad</h3>
+
+      <div class="form-group">
+        <label for="pass-actual">Contraseña actual</label>
+        <input id="pass-actual" type="password" placeholder="••••••••" />
+      </div>
+
+      <div class="form-group">
+        <label for="pass-nueva">Nueva contraseña</label>
+        <input id="pass-nueva" type="password" placeholder="••••••••" />
+      </div>
+
+      <button class="btn-secondary">Cambiar Contraseña</button>
+    </div>
+
+    <div class="config-card">
+      <h3>Tema</h3>
+      <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.9rem">
+        Cambiar entre tema claro y oscuro
+      </p>
+      <app-theme-switcher></app-theme-switcher>
+    </div>
+  </div>
+</div>

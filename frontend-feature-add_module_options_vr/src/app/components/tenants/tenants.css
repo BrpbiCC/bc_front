@@ -1,0 +1,136 @@
+.tenants-wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tenants-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tenants-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.75rem;
+  color: var(--text-primary);
+}
+
+.tenants-subtitle {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.btn-nuevo {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--surface-lowest);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stat-activo { color: #1D9E75; }
+.stat-inactivo { color: #E24B4A; }
+.stat-mant { color: #EF9F27; }
+
+.table-card {
+  background: var(--surface-lowest);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tenants-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tenants-table th {
+  background: var(--surface);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.tenants-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.tenants-table tr:last-child td {
+  border-bottom: none;
+}
+
+.id-code {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.nombre-cell { font-weight: 500; }
+.fecha-cell { color: var(--text-secondary); font-size: 0.85rem; }
+
+.plan-badge, .estado-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.plan-basic    { background: #F1EFE8; color: #444441; }
+.plan-pro      { background: #E6F1FB; color: #0C447C; }
+.plan-enterprise { background: #EEEDFE; color: #3C3489; }
+
+.badge-activo  { background: #E1F5EE; color: #0F6E56; }
+.badge-inactivo { background: #FCEBEB; color: #A32D2D; }
+.badge-mant    { background: #FAEEDA; color: #854F0B; }
+
+.btn-accion {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+}
+
+.btn-accion:hover {
+  background: var(--hover-bg-light);
+}

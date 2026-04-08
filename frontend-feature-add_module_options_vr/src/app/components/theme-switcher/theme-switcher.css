@@ -1,0 +1,72 @@
+@import '../../styles/colors.css';
+
+.theme-switcher {
+  width: 100%;
+}
+
+.theme-toggle-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: var(--primary);
+  color: var(--text-white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+  &:hover {
+    background-color: var(--primary-hover);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.theme-label {
+  flex: 1;
+  text-align: left;
+  font-weight: 600;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  animation: fadeInOut 0.3s ease;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sun-icon {
+  stroke: white;
+}
+
+.moon-icon {
+  fill: white;
+}
+
+/* Tema oscuro */
+:where([data-theme='dark']) .theme-toggle-btn {
+  background-color: var(--primary);
+}

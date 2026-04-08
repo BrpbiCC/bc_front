@@ -1,0 +1,105 @@
+.page-container {
+  padding: 2rem;
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+.page-header h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.visits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.visit-card {
+  background-color: var(--surface-lowest);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+  transition: border-color 0.2s;
+}
+.visit-card:hover {
+  border-color: var(--hover-overlay-7);
+}
+.visit-card.completed {
+  opacity: 0.55;
+}
+
+.visit-time {
+  min-width: 75px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  padding-right: 1.5rem;
+}
+.visit-time h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.visit-time span {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.visit-info h4 {
+  margin: 0 0 0.35rem 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+.visit-info p {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.status.pending {
+  background: var(--status-pending-bg);
+  color: var(--status-pending-text);
+  border: 1px solid var(--status-pending-border);
+}
+.status.done {
+  background: var(--status-done-bg);
+  color: var(--status-done-text);
+  border: 1px solid var(--status-done-border);
+}
+.status.scheduled {
+  background: var(--status-scheduled-bg);
+  color: var(--status-scheduled-text);
+  border: 1px solid var(--status-scheduled-border);
+}

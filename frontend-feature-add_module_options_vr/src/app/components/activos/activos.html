@@ -1,0 +1,40 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2>Gestión de Activos</h2>
+    <button class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Nuevo Registro
+    </button>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Código NFC</th>
+          <th>Equipo</th>
+          <th>Estado Actual</th>
+          <th>Última Revisión</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let activo of activos">
+          <td><strong>{{ activo.codigo }}</strong></td>
+          <td>{{ activo.equipo }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="activo.estado.toLowerCase()">
+              {{ activo.estado }}
+            </span>
+          </td>
+          <td class="muted">{{ activo.ultimaRevision }}</td>
+          <td>
+            <button class="btn-icon-sm" title="Ver historial">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

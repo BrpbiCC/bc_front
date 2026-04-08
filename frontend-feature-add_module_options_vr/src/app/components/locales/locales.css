@@ -1,0 +1,107 @@
+.page-container {
+  padding: 2rem;
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+.page-header h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.locales-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.local-card {
+  background-color: var(--surface-lowest);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.local-card:hover {
+  border-color: var(--hover-overlay-6);
+}
+
+.local-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.local-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-dot.online {
+  background-color: var(--status-online-text);
+  box-shadow: 0 0 6px var(--status-online-glow);
+}
+.status-dot.offline {
+  background-color: var(--status-offline-text);
+}
+
+.local-body {
+  padding: 1rem 1.25rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.local-body p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.label {
+  color: var(--text-dark);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 0.4rem;
+}
+
+.local-footer {
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.btn-secondary {
+  width: 100%;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background-color: var(--primary-dim);
+}
