@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { FilterService } from '../../core/services/filter.service';
 
 export interface ActivoNFC {
@@ -45,16 +46,96 @@ const DATOS_ACTIVOS: ActivoNFC[] = [
 @Component({
   selector: 'app-activos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './activos.html',
   styleUrls: ['./activos.css'],
 })
 export class Activos implements OnInit {
-  activos = DATOS_ACTIVOS;
+  activeTab: 'list' | 'create' = 'list';
+  isEditing = false;
+  editingIndex: number | null = null;
+
+  activos: ActivoNFC[] = DATOS_ACTIVOS;
+
+  estados = ['Operativo', 'Mantenimiento', 'Alerta'];
+  equipos = [
+    'Conservadora Vertical A1',
+    'Vitrina Exhibidora',
+    'Cámara Frigorífica 02',
+    'Conservadora Horizontal B',
+    'Vitrina Pastelería',
+    'Otro (especificar)'
+  ];
+
+  newActivo: ActivoNFC = {
+    codigo: '',
+    equipo: '',
+    estado: 'Operativo',
+    ultimaRevision: new Date().toLocaleString('es-ES')
+  };
 
   constructor(private filterService: FilterService) {}
 
   ngOnInit(): void {
     this.filterService.setActiveView('activos');
+  }
+
+  setActiveTab(tab: 'list' | 'create'): void {
+    this.activeTab = tab;
+  }
+
+  generateCodigo(): string {
+    const numAleatorio = Math.floor(Math.random() * 9999).toString().padStart(4, '0');
+    return `NFC-${numAleatorio}`;
+  }
+
+  createActivo(): void {
+    if (this.newActivo.codigo && this.newActivo.equipo) {
+      if (this.isEditing && this.editingIndex !== null) {
+        this.activos[this.editingIndex] = { ...this.newActivo };
+        this.cancelEdit();
+      } else {
+        const activoNuevo: ActivoNFC = {
+          ...this.newActivo,
+          codigo: this.newActivo.codigo || this.generateCodigo(),
+          ultimaRevision: new Date().toLocaleString('es-ES')
+        };
+        this.activos.push(activoNuevo);
+        this.resetForm();
+      }
+      this.activeTab = 'list';
+    }
+  }
+
+  editActivo(index: number): void {
+    this.newActivo = { ...this.activos[index] };
+    this.isEditing = true;
+    this.editingIndex = index;
+    this.activeTab = 'create';
+  }
+
+  deleteActivo(index: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este activo NFC? Esta acción no puede deshacerse.')) {
+      this.activos.splice(index, 1);
+    }
+  }
+
+  cancelEdit(): void {
+    this.resetForm();
+    this.isEditing = false;
+    this.editingIndex = null;
+  }
+
+  resetForm(): void {
+    this.newActivo = {
+      codigo: '',
+      equipo: '',
+      estado: 'Operativo',
+      ultimaRevision: new Date().toLocaleString('es-ES')
+    };
+  }
+
+  generateCodigoAuto(): void {
+    this.newActivo.codigo = this.generateCodigo();
   }
 }

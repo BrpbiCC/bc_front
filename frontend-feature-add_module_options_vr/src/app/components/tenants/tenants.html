@@ -5,57 +5,131 @@
       <h1 class="tenants-title">Tenants</h1>
       <p class="tenants-subtitle">Gestión global de organizaciones</p>
     </div>
-    <button class="btn-nuevo">
-      + Nuevo Tenant
+  </div>
+
+  <!-- Pestañas -->
+  <div class="tabs-container">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'list'"
+      (click)="setActiveTab('list')">
+      Lista de Tenants
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'create'"
+      (click)="setActiveTab('create')">
+      Crear Tenant
     </button>
   </div>
 
-  <div class="stats-row">
-    <div class="stat-card">
-      <span class="stat-label">Total Tenants</span>
-      <span class="stat-value">{{ tenants.length }}</span>
+  <!-- Pestaña: Lista de Tenants -->
+  <div class="tab-content" *ngIf="activeTab === 'list'">
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-label">Total Tenants</span>
+        <span class="stat-value">{{ tenants.length }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Activos</span>
+        <span class="stat-value stat-activo">{{ tenants.filter(t => t.estado === 'Activo').length }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Inactivos</span>
+        <span class="stat-value stat-inactivo">{{ tenants.filter(t => t.estado === 'Inactivo').length }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">En Mantenimiento</span>
+        <span class="stat-value stat-mant">{{ tenants.filter(t => t.estado === 'Mantenimiento').length }}</span>
+      </div>
     </div>
-    <div class="stat-card">
-      <span class="stat-label">Activos</span>
-      <span class="stat-value stat-activo">3</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">Inactivos</span>
-      <span class="stat-value stat-inactivo">1</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">En Mantenimiento</span>
-      <span class="stat-value stat-mant">1</span>
+
+    <div class="table-card">
+      <table class="tenants-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Plan</th>
+            <th>Usuarios</th>
+            <th>Estado</th>
+            <th>Fecha alta</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of tenants">
+            <td><code class="id-code">{{ t.id }}</code></td>
+            <td class="nombre-cell">{{ t.nombre }}</td>
+            <td><span class="plan-badge" [ngClass]="getPlanClass(t.plan)">{{ t.plan }}</span></td>
+            <td>{{ t.usuarios }}</td>
+            <td><span class="estado-badge" [ngClass]="getEstadoClass(t.estado)">{{ t.estado }}</span></td>
+            <td class="fecha-cell">{{ t.fecha }}</td>
+            <td>
+              <button class="btn-accion">Ver</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <div class="table-card">
-    <table class="tenants-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Plan</th>
-          <th>Usuarios</th>
-          <th>Estado</th>
-          <th>Fecha alta</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let t of tenants">
-          <td><code class="id-code">{{ t.id }}</code></td>
-          <td class="nombre-cell">{{ t.nombre }}</td>
-          <td><span class="plan-badge" [ngClass]="getPlanClass(t.plan)">{{ t.plan }}</span></td>
-          <td>{{ t.usuarios }}</td>
-          <td><span class="estado-badge" [ngClass]="getEstadoClass(t.estado)">{{ t.estado }}</span></td>
-          <td class="fecha-cell">{{ t.fecha }}</td>
-          <td>
-            <button class="btn-accion">Ver</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Pestaña: Crear Tenant -->
+  <div class="tab-content" *ngIf="activeTab === 'create'">
+    <form class="create-form">
+      <div class="form-group">
+        <label for="nombre">Nombre del Tenant *</label>
+        <input 
+          type="text" 
+          id="nombre" 
+          [(ngModel)]="newTenant.nombre"
+          name="nombre"
+          placeholder="Ej: Empresa XYZ"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="plan">Plan *</label>
+        <select 
+          id="plan" 
+          [(ngModel)]="newTenant.plan"
+          name="plan"
+          required>
+          <option value="">Seleccione un plan</option>
+          <option *ngFor="let plan of planes" [value]="plan">{{ plan }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="usuarios">Número de Usuarios</label>
+        <input 
+          type="number" 
+          id="usuarios" 
+          [(ngModel)]="newTenant.usuarios"
+          name="usuarios"
+          min="1"
+          placeholder="0">
+      </div>
+
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select 
+          id="estado" 
+          [(ngModel)]="newTenant.estado"
+          name="estado">
+          <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-primary" (click)="createTenant()">
+          Crear Tenant
+        </button>
+        <button type="button" class="btn-secondary" (click)="setActiveTab('list')">
+          Cancelar
+        </button>
+      </div>
+    </form>
   </div>
 
 </div>

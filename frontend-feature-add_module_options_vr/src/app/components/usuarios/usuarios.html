@@ -1,44 +1,93 @@
 <div class="page-container">
   <div class="page-header">
     <h2>Gestión de Personal</h2>
-    <button class="btn-primary">Crear Usuario</button>
   </div>
 
-  <div class="users-grid">
-    <div class="user-card">
-      <div class="card-avatar">CM</div>
-      <div class="card-info">
-        <h3>Carlos Mendoza</h3>
-        <p>Técnico de Campo</p>
-        <span class="badge active">Activo</span>
-      </div>
-    </div>
+  <!-- Pestañas -->
+  <div class="tabs-container">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'list'"
+      (click)="setActiveTab('list')">
+      Lista de Usuarios
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'create'"
+      (click)="setActiveTab('create')">
+      Crear Usuario
+    </button>
+  </div>
 
-    <div class="user-card">
-      <div class="card-avatar">LA</div>
-      <div class="card-info">
-        <h3>Luis Araya</h3>
-        <p>Técnico de Campo</p>
-        <span class="badge active">Activo</span>
+  <!-- Pestaña: Lista de Usuarios -->
+  <div class="tab-content" *ngIf="activeTab === 'list'">
+    <div class="users-grid">
+      <div class="user-card" *ngFor="let usuario of usuarios; let i = index">
+        <div class="card-avatar">{{ getInitials(usuario.name) }}</div>
+        <div class="card-info">
+          <h3>{{ usuario.name }}</h3>
+          <p>{{ usuario.role }}</p>
+          <span class="badge" [class.active]="usuario.status === 'Activo'" [class.inactive]="usuario.status === 'Inactivo'">
+            {{ usuario.status }}
+          </span>
+        </div>
+        <div class="card-actions">
+          <button class="btn-action btn-edit" (click)="editUsuario(i)" title="Editar usuario">✏️</button>
+          <button class="btn-action btn-delete" (click)="deleteUsuario(i)" title="Eliminar usuario">🗑️</button>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="user-card">
-      <div class="card-avatar admin">AD</div>
-      <div class="card-info">
-        <h3>Admin Sistema</h3>
-        <p>Administrador</p>
-        <span class="badge active">Activo</span>
+  <!-- Pestaña: Crear/Editar Usuario -->
+  <div class="tab-content" *ngIf="activeTab === 'create'">
+    <form class="create-form">
+      <div class="form-header" *ngIf="isEditing">
+        <p class="edit-notice">Editando usuario</p>
       </div>
-    </div>
 
-    <div class="user-card">
-      <div class="card-avatar">PV</div>
-      <div class="card-info">
-        <h3>Pedro Vásquez</h3>
-        <p>Supervisor</p>
-        <span class="badge inactive">Inactivo</span>
+      <div class="form-group">
+        <label for="name">Nombre Completo *</label>
+        <input 
+          type="text" 
+          id="name" 
+          [(ngModel)]="newUsuario.name"
+          name="name"
+          placeholder="Ingrese nombre completo"
+          required>
       </div>
-    </div>
+
+      <div class="form-group">
+        <label for="role">Rol *</label>
+        <select 
+          id="role" 
+          [(ngModel)]="newUsuario.role"
+          name="role"
+          required>
+          <option value="">Seleccione un rol</option>
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Estado</label>
+        <select 
+          id="status" 
+          [(ngModel)]="newUsuario.status"
+          name="status">
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-primary" (click)="createUsuario()">
+          {{ isEditing ? 'Actualizar Usuario' : 'Crear Usuario' }}
+        </button>
+        <button type="button" class="btn-secondary" (click)="isEditing ? cancelEdit() : setActiveTab('list')">
+          {{ isEditing ? 'Cancelar Edición' : 'Cancelar' }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>

@@ -1,44 +1,125 @@
 <div class="page-container">
   <div class="page-header">
     <h2>Agenda de Visitas</h2>
-    <button class="btn-primary">Programar Visita</button>
   </div>
 
-  <div class="visits-list">
-    <div class="visit-card">
-      <div class="visit-time">
-        <h3>09:00</h3>
-        <span>Hoy</span>
-      </div>
-      <div class="visit-info">
-        <h4>Mantenimiento Preventivo</h4>
-        <p>Local: Bodegón El Sol &mdash; Técnico: Carlos M.</p>
-        <span class="status pending">Pendiente</span>
-      </div>
-    </div>
+  <!-- Pestañas -->
+  <div class="tabs-container">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'list'"
+      (click)="setActiveTab('list')">
+      Lista de Visitas
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'create'"
+      (click)="setActiveTab('create')">
+      Programar Visita
+    </button>
+  </div>
 
-    <div class="visit-card completed">
-      <div class="visit-time">
-        <h3>07:30</h3>
-        <span>Hoy</span>
-      </div>
-      <div class="visit-info">
-        <h4>Revisión de Compresor</h4>
-        <p>Local: Supermercado Norte &mdash; Técnico: Luis A.</p>
-        <span class="status done">Completada</span>
+  <!-- Pestaña: Lista de Visitas -->
+  <div class="tab-content" *ngIf="activeTab === 'list'">
+    <div class="visits-list">
+      <div class="visit-card" *ngFor="let visita of visitas; let i = index" [class.completed]="visita.estado === 'Completada'">
+        <div class="visit-time">
+          <h3>{{ visita.tiempo }}</h3>
+          <span>{{ visita.dia }}</span>
+        </div>
+        <div class="visit-info">
+          <h4>{{ visita.titulo }}</h4>
+          <p>Local: {{ visita.local }} &mdash; Técnico: {{ visita.tecnico }}</p>
+          <span class="status" [ngClass]="getStatusClass(visita.estado)">{{ visita.estado }}</span>
+        </div>
+        <div class="visit-actions">
+          <button class="btn-action btn-edit" (click)="editVisita(i)" title="Editar visita">✏️ Editar</button>
+          <button class="btn-action btn-delete" (click)="deleteVisita(i)" title="Eliminar visita">🗑️ Eliminar</button>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="visit-card">
-      <div class="visit-time">
-        <h3>11:30</h3>
-        <span>Mañana</span>
+  <!-- Pestaña: Crear/Editar Visita -->
+  <div class="tab-content" *ngIf="activeTab === 'create'">
+    <form class="create-form">
+      <div class="form-header" *ngIf="isEditing">
+        <p class="edit-notice">Editando visita</p>
       </div>
-      <div class="visit-info">
-        <h4>Instalación NFC Tag</h4>
-        <p>Local: Minimarket Central &mdash; Técnico: Pedro V.</p>
-        <span class="status scheduled">Programada</span>
+
+      <div class="form-group">
+        <label for="tiempo">Hora *</label>
+        <input 
+          type="time" 
+          id="tiempo" 
+          [(ngModel)]="newVisita.tiempo"
+          name="tiempo"
+          required>
       </div>
-    </div>
+
+      <div class="form-group">
+        <label for="dia">Día *</label>
+        <select 
+          id="dia" 
+          [(ngModel)]="newVisita.dia"
+          name="dia"
+          required>
+          <option *ngFor="let dia of dias" [value]="dia">{{ dia }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="titulo">Descripción de la Visita *</label>
+        <input 
+          type="text" 
+          id="titulo" 
+          [(ngModel)]="newVisita.titulo"
+          name="titulo"
+          placeholder="Ej: Mantenimiento Preventivo"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="local">Local/Ubicación *</label>
+        <input 
+          type="text" 
+          id="local" 
+          [(ngModel)]="newVisita.local"
+          name="local"
+          placeholder="Ej: Bodegón El Sol"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="tecnico">Técnico Asignado *</label>
+        <select 
+          id="tecnico" 
+          [(ngModel)]="newVisita.tecnico"
+          name="tecnico"
+          required>
+          <option value="">Seleccione un técnico</option>
+          <option *ngFor="let tecnico of tecnicos" [value]="tecnico">{{ tecnico }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select 
+          id="estado" 
+          [(ngModel)]="newVisita.estado"
+          name="estado">
+          <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-primary" (click)="createVisita()">
+          {{ isEditing ? 'Actualizar Visita' : 'Programar Visita' }}
+        </button>
+        <button type="button" class="btn-secondary" (click)="isEditing ? cancelEdit() : setActiveTab('list')">
+          {{ isEditing ? 'Cancelar Edición' : 'Cancelar' }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>

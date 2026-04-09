@@ -1,17 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { FilterService } from '../../core/services/filter.service';
+
+interface Tenant {
+  id: string;
+  nombre: string;
+  plan: string;
+  usuarios: number;
+  estado: string;
+  fecha: string;
+}
 
 @Component({
   selector: 'app-tenants',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './tenants.html',
   styleUrls: ['./tenants.css']
 })
 export class Tenants implements OnInit {
+  activeTab: 'list' | 'create' = 'list';
 
-  tenants = [
+  tenants: Tenant[] = [
     { id: 'T-001', nombre: 'Empresa Alpha', plan: 'Pro', usuarios: 24, estado: 'Activo', fecha: '2024-01-15' },
     { id: 'T-002', nombre: 'Corporación Beta', plan: 'Enterprise', usuarios: 120, estado: 'Activo', fecha: '2024-02-20' },
     { id: 'T-003', nombre: 'Grupo Gamma', plan: 'Basic', usuarios: 8, estado: 'Inactivo', fecha: '2024-03-10' },
@@ -20,11 +31,51 @@ export class Tenants implements OnInit {
   ];
 
   columnas = ['id', 'nombre', 'plan', 'usuarios', 'estado', 'fecha'];
+  planes = ['Basic', 'Pro', 'Enterprise'];
+  estados = ['Activo', 'Inactivo', 'Mantenimiento'];
+
+  newTenant: Tenant = {
+    id: '',
+    nombre: '',
+    plan: '',
+    usuarios: 0,
+    estado: 'Activo',
+    fecha: new Date().toISOString().split('T')[0]
+  };
 
   constructor(private filterService: FilterService) {}
 
   ngOnInit(): void {
     this.filterService.setActiveView('tenants');
+  }
+
+  setActiveTab(tab: 'list' | 'create'): void {
+    this.activeTab = tab;
+  }
+
+  generateId(): string {
+    const nextNum = this.tenants.length + 1;
+    return `T-${String(nextNum).padStart(3, '0')}`;
+  }
+
+  createTenant(): void {
+    if (this.newTenant.nombre && this.newTenant.plan) {
+      const tenant: Tenant = {
+        ...this.newTenant,
+        id: this.generateId(),
+        fecha: new Date().toISOString().split('T')[0]
+      };
+      this.tenants.push(tenant);
+      this.newTenant = {
+        id: '',
+        nombre: '',
+        plan: '',
+        usuarios: 0,
+        estado: 'Activo',
+        fecha: new Date().toISOString().split('T')[0]
+      };
+      this.activeTab = 'list';
+    }
   }
 
   getEstadoClass(estado: string): string {
