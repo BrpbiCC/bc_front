@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 interface Notification {
   id: number;
@@ -22,6 +22,9 @@ export class TopbarMobile implements OnInit {
   @Output() closeMenu = new EventEmitter<void>();
 
   showNotifications = false;
+  isDarkTheme = false;
+
+  constructor(private router: Router) {}
 
   notifications: Notification[] = [
     {
@@ -50,10 +53,17 @@ export class TopbarMobile implements OnInit {
     },
   ];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadSavedTheme();
+  }
 
   onClose(): void {
     this.closeMenu.emit();
+  }
+
+  logout(): void {
+    this.onClose();
+    this.router.navigate(['/login']);
   }
 
   toggleNotifications(): void {
@@ -66,5 +76,25 @@ export class TopbarMobile implements OnInit {
 
   getUnreadCount(): number {
     return this.notifications.filter((n) => !n.read).length;
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    this.applyTheme();
+    localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+  }
+
+  loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    this.isDarkTheme = savedTheme === 'dark';
+    this.applyTheme();
+  }
+
+  private applyTheme() {
+    if (this.isDarkTheme) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
   }
 }

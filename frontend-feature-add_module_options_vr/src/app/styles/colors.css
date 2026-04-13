@@ -98,10 +98,10 @@
 ========================= */
 [data-theme='dark'] {
   /* Colores de marca */
-  --primary: #ff7a3c;
-  --primary-hover: #ff8f5a;
-  --primary-light: #ff7a3c;
-  --primary-dim: rgba(255, 122, 60, 0.12);
+  --primary: #F97316;
+  --primary-hover: #FB923C;
+  --primary-light: #FB923C;
+  --primary-dim: rgba(249, 115, 22, 0.12);
 
   /* Estados */
   --error: #ff6b6b;
@@ -116,28 +116,28 @@
   --neutral-high: #ff4d6d;
 
   /* Superficies y fondos */
-  --surface: #0f172a;
-  --surface-low: #162032;
-  --surface-lowest: #1e293b;
+  --surface: #111827;
+  --surface-low: #19232A;
+  --surface-lowest: #1E2A3A;
 
   /* Textos */
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-primary: #FFFFFF;
+  --text-secondary: #C9D1D9;
+  --text-muted: #8B9AB0;
   --text-light: #cbd5e1;
   --text-lighter: #bbb;
   --text-dark: #ddd;
   --text-white: #ffffff;
 
   /* Bordes */
-  --border: #334155;
-  --border-light: #475569;
-  --border-dark: #141414;
+  --border: #2E3E52;
+  --border-light: #3A4A5E;
+  --border-dark: #0D1117;
 
   /* Interacciones */
-  --hover-bg: rgba(255, 122, 60, 0.04);
-  --hover-bg-light: rgba(255, 122, 60, 0.08);
-  --hover-bg-lighter: rgba(255, 122, 60, 0.12);
+  --hover-bg: rgba(249, 115, 22, 0.04);
+  --hover-bg-light: rgba(249, 115, 22, 0.08);
+  --hover-bg-lighter: rgba(249, 115, 22, 0.12);
   --hover-overlay-1: rgba(255, 255, 255, 0.02);
   --hover-overlay-2: rgba(255, 255, 255, 0.03);
   --hover-overlay-3: rgba(255, 255, 255, 0.05);

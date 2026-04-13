@@ -30,6 +30,7 @@ export class Topbar implements OnInit {
   comunasOptions: Array<{ value: string; label: string }> = [];
   showFiltersDropdown = false;
   showNotifications = false;
+  showUserDropdown = false;
   showMobileMenu = false;
   openMultiSelect: string | null = null;
   dateRanges: { [key: string]: { start: string; end: string } } = {};
@@ -42,6 +43,7 @@ export class Topbar implements OnInit {
   canGoPrev = false;
   
   notifications: Notification[] = [];
+  isDarkTheme = false;
 
   constructor(
     private router: Router,
@@ -58,6 +60,7 @@ export class Topbar implements OnInit {
 
     this.loadFilters();
     this.loadCarousel();
+    this.loadSavedTheme();
 
     this.router.events.subscribe(() => {
       this.loadFilters();
@@ -102,6 +105,7 @@ export class Topbar implements OnInit {
   toggleFiltersDropdown(): void {
     this.showFiltersDropdown = !this.showFiltersDropdown;
     this.showNotifications = false;
+    this.showUserDropdown = false;
   }
 
   closeFiltersDropdown(): void {
@@ -111,10 +115,23 @@ export class Topbar implements OnInit {
   toggleNotifications(): void {
     this.showNotifications = !this.showNotifications;
     this.showFiltersDropdown = false;
+    this.showUserDropdown = false;
   }
 
   closeNotifications(): void {
     this.showNotifications = false;
+  }
+
+  toggleUserDropdown(): void {
+    this.showUserDropdown = !this.showUserDropdown;
+    if (this.showUserDropdown) {
+      this.showNotifications = false;
+      this.showFiltersDropdown = false;
+    }
+  }
+
+  closeUserDropdown(): void {
+    this.showUserDropdown = false;
   }
 
   markAllRead(): void {
@@ -250,6 +267,27 @@ export class Topbar implements OnInit {
   }
 
   logout() {
+    this.showUserDropdown = false;
     this.router.navigate(['/login']);
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    this.applyTheme();
+    localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+  }
+
+  loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    this.isDarkTheme = savedTheme === 'dark';
+    this.applyTheme();
+  }
+
+  private applyTheme() {
+    if (this.isDarkTheme) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
   }
 }

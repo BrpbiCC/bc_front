@@ -3,12 +3,14 @@
    ══════════════════════════════════════════════════ */
 
 .db-wrapper {
-  padding: 1.5rem;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 20px;
   max-width: 1400px;
   margin: 0 auto;
+  background-color: var(--surface);
+  min-height: 100vh;
 }
 
 /* ── Encabezado ──────────────────────────────────── */
@@ -21,41 +23,43 @@
 }
 
 .db-title {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 700;
   margin: 0;
-  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
 }
 
 .db-subtitle {
   font-size: 13px;
-  color: #888;
-  margin: 3px 0 0;
+  color: var(--text-muted);
+  margin: 4px 0 0;
 }
 
 .chip-live {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 12px;
-  font-weight: 500;
-  color: #0F6E56;
-  background: #E1F5EE;
-  padding: 5px 12px;
+  font-weight: 600;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 6px 14px;
   border-radius: 20px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .live-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #1D9E75;
-  animation: pulse 1.8s infinite;
+  background: #10B981;
+  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.4; transform: scale(0.85); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 /* ── Grid métricas ───────────────────────────────── */
@@ -69,23 +73,23 @@
 @media (max-width: 700px)  { .metrics-grid { grid-template-columns: repeat(2, 1fr); } }
 
 .metric-card {
-  border-radius: 12px !important;
-  border: 1px solid #e8e8e8 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
   border-left-width: 3px !important;
-  transition: transform 0.18s, box-shadow 0.18s;
+  background-color: var(--surface-lowest) !important;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .metric-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08) !important;
+  background-color: rgba(249, 115, 22, 0.05) !important;
 }
 
-.border-primary  { border-left-color: #185FA5 !important; }
-.border-accent   { border-left-color: #1D9E75 !important; }
-.border-warn     { border-left-color: #E24B4A !important; }
-.border-success  { border-left-color: #639922 !important; }
-.border-info     { border-left-color: #534AB7 !important; }
-.border-purple   { border-left-color: #D4537E !important; }
+.border-primary  { border-left-color: var(--primary) !important; }
+.border-accent   { border-left-color: #10B981 !important; }
+.border-warn     { border-left-color: #EF4444 !important; }
+.border-success  { border-left-color: #8B5CF6 !important; }
+.border-info     { border-left-color: #3B82F6 !important; }
+.border-purple   { border-left-color: #EC4899 !important; }
 
 .metric-content {
   padding: 14px 16px 14px !important;
@@ -100,7 +104,7 @@
 
 .metric-label {
   font-size: 12px;
-  color: #888;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
@@ -119,15 +123,16 @@
 .icon-purple   { color: #D4537E; }
 
 .metric-value {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   margin: 0 0 4px;
   letter-spacing: -0.5px;
+  color: var(--text-primary);
 }
 
 .metric-sub {
   font-size: 11px;
-  color: #aaa;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -148,13 +153,15 @@
 }
 
 .chart-card {
-  border-radius: 12px !important;
-  border: 1px solid #e8e8e8 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
+  background-color: var(--surface-lowest) !important;
 }
 
 .chart-title {
   font-size: 14px !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
 }
 
 .chart-container {
@@ -175,7 +182,7 @@
   align-items: center;
   gap: 5px;
   font-size: 11px;
-  color: #888;
+  color: var(--text-secondary);
 }
 
 .leg-dot {
@@ -206,19 +213,20 @@
   flex-shrink: 0;
 }
 
-.ds-activo   { background: #185FA5; }
-.ds-inactivo { background: #E24B4A; }
-.ds-mant     { background: #EF9F27; }
+.ds-activo   { background: var(--primary); }
+.ds-inactivo { background: #EF4444; }
+.ds-mant     { background: #8B5CF6; }
 
 .ds-val {
   font-size: 16px;
   font-weight: 700;
   margin: 0;
+  color: var(--text-primary);
 }
 
 .ds-lbl {
   font-size: 11px;
-  color: #aaa;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -252,7 +260,7 @@
 
 .cat-name {
   font-size: 13px;
-  color: #444;
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -268,6 +276,7 @@
   font-weight: 700;
   min-width: 46px;
   text-align: right;
+  color: var(--text-primary);
 }
 
 mat-progress-bar {
@@ -276,16 +285,17 @@ mat-progress-bar {
 }
 
 /* Progress bar colors — Angular Material MDC */
-.pb-primary  ::ng-deep .mdc-linear-progress__bar-inner { border-color: #185FA5 !important; }
-.pb-green    ::ng-deep .mdc-linear-progress__bar-inner { border-color: #639922 !important; }
-.pb-amber    ::ng-deep .mdc-linear-progress__bar-inner { border-color: #BA7517 !important; }
-.pb-purple   ::ng-deep .mdc-linear-progress__bar-inner { border-color: #534AB7 !important; }
-.pb-pink     ::ng-deep .mdc-linear-progress__bar-inner { border-color: #D4537E !important; }
+.pb-primary  ::ng-deep .mdc-linear-progress__bar-inner { border-color: var(--primary) !important; }
+.pb-green    ::ng-deep .mdc-linear-progress__bar-inner { border-color: #10B981 !important; }
+.pb-amber    ::ng-deep .mdc-linear-progress__bar-inner { border-color: #8B5CF6 !important; }
+.pb-purple   ::ng-deep .mdc-linear-progress__bar-inner { border-color: #3B82F6 !important; }
+.pb-pink     ::ng-deep .mdc-linear-progress__bar-inner { border-color: #EC4899 !important; }
 
 /* ── Tabla ───────────────────────────────────────── */
 .table-card {
-  border-radius: 12px !important;
-  border: 1px solid #e8e8e8 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
+  background-color: var(--surface-lowest) !important;
 }
 
 .table-card mat-card-header {
@@ -321,61 +331,77 @@ mat-progress-bar {
 .db-table th {
   font-size: 11px !important;
   font-weight: 600 !important;
-  color: #aaa !important;
+  color: var(--text-muted) !important;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
-.db-row:hover { background: #f7f8fc; }
+.db-row:hover { background-color: var(--surface-low) !important; }
 
 .id-code {
   font-family: monospace;
   font-size: 12px;
-  background: #f0f2f8;
-  padding: 2px 7px;
-  border-radius: 5px;
+  background: var(--surface-low);
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
 }
 
 .ubicacion-txt {
   display: flex;
   align-items: center;
   gap: 3px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .loc-icon {
   font-size: 14px !important;
   width: 14px !important;
   height: 14px !important;
-  color: #bbb;
+  color: var(--text-muted) !important;
 }
 
-.fecha-txt { color: #aaa; }
+.fecha-txt { color: var(--text-secondary); }
 
 /* ── Badges estado ───────────────────────────────── */
 .badge {
   display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
+  padding: 4px 12px;
+  border-radius: 16px;
   font-size: 11px;
   font-weight: 600;
+  border: 1px solid;
 }
 
-.badge-activo   { background: #EAF3DE; color: #3B6D11; }
-.badge-inactivo { background: #FCEBEB; color: #A32D2D; }
-.badge-mant     { background: #FAEEDA; color: #854F0B; }
+.badge-activo   { background: rgba(16, 185, 129, 0.1); color: #10B981; border-color: rgba(16, 185, 129, 0.3); }
+.badge-inactivo { background: rgba(239, 68, 68, 0.1); color: #EF4444; border-color: rgba(239, 68, 68, 0.3); }
+.badge-mant     { background: rgba(139, 92, 246, 0.1); color: #8B5CF6; border-color: rgba(139, 92, 246, 0.3); }
 
 /* ── Badges categoría ────────────────────────────── */
 .cat-badge {
   display: inline-block;
-  padding: 2px 8px;
-  border-radius: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
   font-size: 11px;
   font-weight: 600;
+  border: 1px solid;
 }
 
-.cat-tenant     { background: #E6F1FB; color: #185FA5; }
-.cat-ticket  { background: #FAEEDA; color: #854F0B; }
-.cat-pedido  { background: #EAF3DE; color: #3B6D11; }
-.cat-usuario { background: #FBEAF0; color: #993556; }
-.cat-local   { background: #EEEDFE; color: #534AB7; }
+.cat-tenant     { background: rgba(249, 115, 22, 0.1); color: var(--primary); border-color: rgba(249, 115, 22, 0.3); }
+.cat-ticket     { background: rgba(251, 146, 60, 0.1); color: #FB923C; border-color: rgba(251, 146, 60, 0.3); }
+.cat-pedido     { background: rgba(16, 185, 129, 0.1); color: #10B981; border-color: rgba(16, 185, 129, 0.3); }
+.cat-usuario    { background: rgba(59, 130, 246, 0.1); color: #3B82F6; border-color: rgba(59, 130, 246, 0.3); }
+.cat-local      { background: rgba(139, 92, 246, 0.1); color: #8B5CF6; border-color: rgba(139, 92, 246, 0.3); }
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Estilos limpiados (colores base ya en CSS vars)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Nota: La mayoría de los estilos dark mode ya están manejados 
+   por las variables CSS en colors.css. Estos sobrescritores son
+   solo para ajustes específicos del dashboard */
+
+:where([data-theme='dark']) .metric-card:hover {
+  background-color: rgba(249, 115, 22, 0.05) !important;
+}

@@ -1,0 +1,18 @@
+.unauthorized-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 1rem;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 1rem;
+}
+
+mat-card-content a {
+  color: #1976d2;
+  text-decoration: none;
+}

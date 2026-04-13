@@ -1,10 +1,11 @@
 // Cambia esta línea del import
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService, type UserRole } from '../../core/services/auth.service';
 import { FilterService } from '../../core/services/filter.service';
+import { LogoComponent } from '../logo';
 
 interface NavItem {
   label?: string;
@@ -16,7 +17,7 @@ interface NavItem {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [CommonModule, RouterModule, LogoComponent],
   templateUrl: './sidebar.html',
   styleUrls: ['./sidebar.css'],
 })
@@ -24,8 +25,6 @@ export class Sidebar implements OnInit {
   @Input() collapsed = false;
   @Output() collapseChange = new EventEmitter<boolean>();
 
-  logoLight = '/imagenes/logos/FrioCheck.svg';
-  logoDark = '/imagenes/logos/FrioCheckDark.svg';
   userRole: UserRole | null = null;
   navItems: NavItem[] = [];
   animationKey = 0;
@@ -152,7 +151,7 @@ export class Sidebar implements OnInit {
   }
 
   private updateNavItems(): void {
-    if (this.userRole === 'soporte') {
+    if (this.userRole === 'support') {
       this.navItems = this.supportItems;
     } else if (this.userRole === 'admin') {
       this.navItems = this.adminItems;

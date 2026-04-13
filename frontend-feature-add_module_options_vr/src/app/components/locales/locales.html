@@ -1,53 +1,101 @@
 <div class="page-container">
   <div class="page-header">
     <h2>Directorio de Locales</h2>
-    <button class="btn-primary">Registrar Local</button>
   </div>
 
-  <div class="locales-grid">
-    <div class="local-card">
-      <div class="local-header">
-        <h3>Bodegón El Sol</h3>
-        <span class="status-dot online" title="En línea"></span>
-      </div>
-      <div class="local-body">
-        <p><span class="label">Dirección</span> Av. Libertador 45, Este</p>
-        <p><span class="label">Encargado</span> Roberto Díaz</p>
-        <p><span class="label">Equipos NFC</span> 12 asignados</p>
-      </div>
-      <div class="local-footer">
-        <button class="btn-secondary">Ver Inventario</button>
-      </div>
-    </div>
+  <!-- Pestañas -->
+  <div class="tabs-container">
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'list'"
+      (click)="setActiveTab('list')">
+      Lista de Locales
+    </button>
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'create'"
+      (click)="setActiveTab('create')">
+      Registrar Local
+    </button>
+  </div>
 
-    <div class="local-card">
-      <div class="local-header">
-        <h3>Supermercado Norte</h3>
-        <span class="status-dot offline" title="Sin actividad"></span>
-      </div>
-      <div class="local-body">
-        <p><span class="label">Dirección</span> Zona Industrial II, Galpón 4</p>
-        <p><span class="label">Encargado</span> Carmen Silva</p>
-        <p><span class="label">Equipos NFC</span> 8 asignados</p>
-      </div>
-      <div class="local-footer">
-        <button class="btn-secondary">Ver Inventario</button>
+  <!-- Pestaña: Lista de Locales -->
+  <div class="tab-content" *ngIf="activeTab === 'list'">
+    <div class="locales-grid">
+      <div class="local-card" *ngFor="let local of locales">
+        <div class="local-header">
+          <h3>{{ local.nombre }}</h3>
+          <span class="status-dot" [class]="local.status" [title]="local.status === 'online' ? 'En línea' : 'Sin actividad'"></span>
+        </div>
+        <div class="local-body">
+          <p><span class="label">Dirección</span> {{ local.direccion }}</p>
+          <p><span class="label">Encargado</span> {{ local.encargado }}</p>
+          <p><span class="label">Equipos NFC</span> {{ local.equiposNFC }} asignados</p>
+        </div>
+        <div class="local-footer">
+          <button class="btn-secondary">Ver Inventario</button>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="local-card">
-      <div class="local-header">
-        <h3>Minimarket Central</h3>
-        <span class="status-dot online" title="En línea"></span>
+  <!-- Pestaña: Registrar Local -->
+  <div class="tab-content" *ngIf="activeTab === 'create'">
+    <form class="create-form">
+      <div class="form-group">
+        <label for="nombre">Nombre del Local *</label>
+        <input
+          type="text"
+          id="nombre"
+          [(ngModel)]="newLocal.nombre"
+          name="nombre"
+          placeholder="Ej: Bodegón El Sol"
+          required>
       </div>
-      <div class="local-body">
-        <p><span class="label">Dirección</span> Calle Merced 102, Piso 1</p>
-        <p><span class="label">Encargado</span> Juan Torres</p>
-        <p><span class="label">Equipos NFC</span> 5 asignados</p>
+
+      <div class="form-group">
+        <label for="direccion">Dirección *</label>
+        <input
+          type="text"
+          id="direccion"
+          [(ngModel)]="newLocal.direccion"
+          name="direccion"
+          placeholder="Ej: Av. Libertador 45, Este"
+          required>
       </div>
-      <div class="local-footer">
-        <button class="btn-secondary">Ver Inventario</button>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="encargado">Encargado *</label>
+          <input
+            type="text"
+            id="encargado"
+            [(ngModel)]="newLocal.encargado"
+            name="encargado"
+            placeholder="Ej: Roberto Díaz"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="equiposNFC">Equipos NFC Iniciales</label>
+          <input
+            type="number"
+            id="equiposNFC"
+            [(ngModel)]="newLocal.equiposNFC"
+            name="equiposNFC"
+            placeholder="0"
+            min="0">
+        </div>
       </div>
-    </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-primary" (click)="createLocal()">
+          Registrar Local
+        </button>
+        <button type="button" class="btn-secondary" (click)="setActiveTab('list')">
+          Cancelar
+        </button>
+      </div>
+    </form>
   </div>
 </div>

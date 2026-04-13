@@ -1,43 +1,128 @@
 <div class="page-container">
   <div class="page-header">
     <h2>Registro de Pedidos</h2>
-    <button class="btn-primary">Solicitar Material</button>
   </div>
 
-  <div class="table-container">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>N° Orden</th>
-          <th>Material / Equipo</th>
-          <th>Cantidad</th>
-          <th>Estado</th>
-          <th>Fecha Solicitud</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="mono">ORD-0091</td>
-          <td>Etiquetas NFC NTAG213</td>
-          <td>500 uds</td>
-          <td><span class="badge in-transit">En Camino</span></td>
-          <td class="muted">20 Mar 2026</td>
-        </tr>
-        <tr>
-          <td class="mono">ORD-0090</td>
-          <td>Termostato Digital W1209</td>
-          <td>15 uds</td>
-          <td><span class="badge delivered">Entregado</span></td>
-          <td class="muted">15 Mar 2026</td>
-        </tr>
-        <tr>
-          <td class="mono">ORD-0089</td>
-          <td>Sensor de temperatura DS18B20</td>
-          <td>30 uds</td>
-          <td><span class="badge pending">Pendiente</span></td>
-          <td class="muted">10 Mar 2026</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Pestañas -->
+  <div class="tabs-container">
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'list'"
+      (click)="setActiveTab('list')">
+      Lista de Pedidos
+    </button>
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'create'"
+      (click)="setActiveTab('create')">
+      Solicitar Material
+    </button>
+  </div>
+
+  <!-- Pestaña: Lista de Pedidos -->
+  <div class="tab-content" *ngIf="activeTab === 'list'">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>N° Orden</th>
+            <th>Material / Equipo</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+            <th>Fecha Solicitud</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pedido of pedidos">
+            <td class="mono">{{ pedido.orden }}</td>
+            <td>{{ pedido.material }}</td>
+            <td>{{ pedido.cantidad }} {{ pedido.unidad }}</td>
+            <td><span class="badge" [ngClass]="pedido.estado.toLowerCase().replace(' ', '-')">{{ pedido.estado }}</span></td>
+            <td class="muted">{{ pedido.fechaSolicitud }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Pestaña: Solicitar Material -->
+  <div class="tab-content" *ngIf="activeTab === 'create'">
+    <form class="create-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="material">Material / Equipo *</label>
+          <input
+            type="text"
+            id="material"
+            [(ngModel)]="newPedido.material"
+            name="material"
+            placeholder="Ej: Etiquetas NFC NTAG213"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="cantidad">Cantidad *</label>
+          <input
+            type="number"
+            id="cantidad"
+            [(ngModel)]="newPedido.cantidad"
+            name="cantidad"
+            placeholder="0"
+            min="1"
+            required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="unidad">Unidad</label>
+          <select
+            id="unidad"
+            [(ngModel)]="newPedido.unidad"
+            name="unidad">
+            <option *ngFor="let unidad of unidades" [value]="unidad">{{ unidad }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="prioridad">Prioridad</label>
+          <select
+            id="prioridad"
+            [(ngModel)]="newPedido.prioridad"
+            name="prioridad">
+            <option *ngFor="let prioridad of prioridades" [value]="prioridad">{{ prioridad }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="fechaSolicitud">Fecha Solicitud</label>
+        <input
+          type="text"
+          id="fechaSolicitud"
+          [(ngModel)]="newPedido.fechaSolicitud"
+          name="fechaSolicitud"
+          readonly>
+      </div>
+
+      <div class="form-group">
+        <label for="observaciones">Observaciones</label>
+        <textarea
+          id="observaciones"
+          [(ngModel)]="newPedido.observaciones"
+          name="observaciones"
+          placeholder="Observaciones adicionales..."
+          rows="3"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-primary" (click)="createPedido()">
+          Solicitar Material
+        </button>
+        <button type="button" class="btn-secondary" (click)="setActiveTab('list')">
+          Cancelar
+        </button>
+      </div>
+    </form>
   </div>
 </div>

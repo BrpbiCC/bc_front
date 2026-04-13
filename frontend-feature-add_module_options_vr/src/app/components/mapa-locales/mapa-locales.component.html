@@ -1,0 +1,61 @@
+<div class="mapa-locales-widget">
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Cargando mapa...</p>
+  </div>
+
+  <div *ngIf="errorMessage && machines.length === 0" class="error-message">
+    <mat-icon>error</mat-icon>
+    <p>{{ errorMessage }}</p>
+    <button mat-raised-button color="primary" (click)="loadMachines()">
+      Reintentar
+    </button>
+  </div>
+
+  <div *ngIf="!loading" class="map-wrapper">
+    <google-map
+      #map
+      [options]="mapOptions"
+      (mapReady)="onMapReady($event)"
+      width="100%"
+      height="400px"
+    >
+    </google-map>
+
+    <aside *ngIf="selectedMachine" class="machine-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ selectedMachine.clientName }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="machine-info">
+            <div class="info-row">
+              <span class="label"><mat-icon>location_on</mat-icon>Dirección:</span>
+              <span class="value">{{ selectedMachine.clientAddress }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label"><mat-icon>nfc</mat-icon>NFC ID:</span>
+              <span class="value">{{ selectedMachine.nfcTagId }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">NFC Code:</span>
+              <span class="value">{{ selectedMachine.nfcCode }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label"><mat-icon>info</mat-icon>Estado:</span>
+              <span class="value status" [ngClass]="'status-' + selectedMachine.status.toLowerCase()">{{ selectedMachine.status }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label"><mat-icon>devices</mat-icon>Tipo:</span>
+              <span class="value">{{ selectedMachine.type }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Marca:</span>
+              <span class="value">{{ selectedMachine.brand }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </aside>
+  </div>
+</div>

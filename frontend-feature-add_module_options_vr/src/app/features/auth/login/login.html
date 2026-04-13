@@ -45,7 +45,61 @@
 
       <button class="btn-login" (click)="onLogin()">Iniciar Sesión</button>
 
-      <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+      <a href="#" class="forgot-link" (click)="openForgotModal()">¿Olvidaste tu contraseña?</a>
+    </div>
+  </div>
+
+  <!-- Modal de recuperación de contraseña -->
+  <div *ngIf="showForgotModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" (click)="closeForgotModal()">&times;</button>
+
+      <h2 class="modal-title">Recuperar contraseña</h2>
+      <p class="modal-description">Ingresa tu correo electrónico o usuario para restablecer tu contraseña.</p>
+
+      <!-- Formulario - Se muestra solo si no se ha enviado -->
+      <div *ngIf="!forgotRecoverySent">
+        <div class="form-group">
+          <label for="forgotEmail">Correo electrónico o usuario</label>
+          <div class="input-wrap">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            <input id="forgotEmail" type="text" [(ngModel)]="forgotEmail" placeholder="Ingresa tu correo o usuario" />
+          </div>
+        </div>
+
+        <div *ngIf="forgotErrorMessage" class="message error-message">
+          {{ forgotErrorMessage }}
+        </div>
+
+        <div class="modal-buttons">
+          <button class="btn-cancel" (click)="closeForgotModal()">Cancelar</button>
+          <button class="btn-send" (click)="onSendRecovery()" [disabled]="forgotIsLoading">
+            <span *ngIf="!forgotIsLoading">Enviar enlace</span>
+            <span *ngIf="forgotIsLoading">Enviando...</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mensaje de éxito - Se muestra después de enviar -->
+      <div *ngIf="forgotRecoverySent" class="success-state">
+        <div class="success-icon">✓</div>
+        <div *ngIf="forgotSuccessMessage" class="message success-message">
+          {{ forgotSuccessMessage }}
+        </div>
+        <p class="success-help">Revisa tu bandeja de entrada (incluyendo spam) para seguir las instrucciones de recuperación.</p>
+        <p class="auto-close-info">El modal se cerrará automáticamente en 2 segundos...</p>
+        <button class="btn-close" (click)="closeForgotModal()">Cerrar ahora</button>
+      </div>
     </div>
   </div>
 </div>

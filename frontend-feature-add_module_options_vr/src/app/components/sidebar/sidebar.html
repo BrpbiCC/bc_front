@@ -1,7 +1,6 @@
 <aside class="sidebar" [class.collapsed]="collapsed" [attr.data-anim-key]="animationKey">
-  <div class="sb-logo" *ngIf="!collapsed">
-    <img [src]="logoLight" alt="FrioCheck Logo" class="logo-icon logo-light" />
-    <img [src]="logoDark" alt="FrioCheck Logo" class="logo-icon logo-dark" />
+  <div class="sb-logo">
+    <app-logo [collapsed]="collapsed"></app-logo>
   </div>
 
   <nav class="sb-nav">

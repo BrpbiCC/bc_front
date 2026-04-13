@@ -21,7 +21,7 @@ import { AuthService, type UserRole } from '../../core/services/auth.service';
             <span class="role-name">Administrador</span>
           </button>
 
-          <button class="role-btn support-btn" (click)="selectRole('soporte')">
+          <button class="role-btn support-btn" (click)="selectRole('support')">
             <span class="role-icon">👨‍💻</span>
             <span class="role-name">Soporte</span>
           </button>

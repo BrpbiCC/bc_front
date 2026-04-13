@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Chart, registerables } from 'chart.js';
+import { MapaLocalesComponent } from '../mapa-locales/mapa-locales.component';
 
 Chart.register(...registerables);
 
@@ -36,6 +37,7 @@ export interface MetricaCard {
     MatIconModule,
     MatButtonModule,
     MatProgressBarModule,
+    MapaLocalesComponent,
   ],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']

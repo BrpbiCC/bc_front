@@ -16,9 +16,53 @@ export class Login {
   logoLight = '/imagenes/logos/FrioCheck.svg';
   logoDark = '/imagenes/logos/FrioCheckDark.svg';
 
+  // Modal de recuperación
+  showForgotModal = false;
+  forgotEmail = '';
+  forgotIsLoading = false;
+  forgotSuccessMessage = '';
+  forgotErrorMessage = '';
+  forgotRecoverySent = false;
+
   constructor(private router: Router) {}
 
   onLogin() {
     this.router.navigate(['/dashboard']);
+  }
+
+  openForgotModal() {
+    this.showForgotModal = true;
+    this.forgotEmail = '';
+    this.forgotSuccessMessage = '';
+    this.forgotErrorMessage = '';
+    this.forgotRecoverySent = false;
+  }
+
+  closeForgotModal() {
+    this.showForgotModal = false;
+    this.forgotRecoverySent = false;
+  }
+
+  onSendRecovery() {
+    this.forgotIsLoading = true;
+    this.forgotSuccessMessage = '';
+    this.forgotErrorMessage = '';
+
+    // Simular envío de recuperación
+    setTimeout(() => {
+      // Simular éxito
+      this.forgotSuccessMessage = 'Tu solicitud de recuperación fue enviada correctamente.';
+      this.forgotRecoverySent = true;
+      this.forgotIsLoading = false;
+
+      // Cerrar automáticamente después de 2 segundos si fue exitoso
+      setTimeout(() => {
+        this.closeForgotModal();
+      }, 2000);
+
+      // Para simular error:
+      // this.forgotErrorMessage = 'Usuario no encontrado. Verifica tu correo o usuario.';
+      // this.forgotIsLoading = false;
+    }, 1500);
   }
 }

@@ -21,21 +21,34 @@
 
   <!-- Pestaña: Lista de Usuarios -->
   <div class="tab-content" *ngIf="activeTab === 'list'">
-    <div class="users-grid">
-      <div class="user-card" *ngFor="let usuario of usuarios; let i = index">
-        <div class="card-avatar">{{ getInitials(usuario.name) }}</div>
-        <div class="card-info">
-          <h3>{{ usuario.name }}</h3>
-          <p>{{ usuario.role }}</p>
-          <span class="badge" [class.active]="usuario.status === 'Activo'" [class.inactive]="usuario.status === 'Inactivo'">
-            {{ usuario.status }}
-          </span>
-        </div>
-        <div class="card-actions">
-          <button class="btn-action btn-edit" (click)="editUsuario(i)" title="Editar usuario">✏️</button>
-          <button class="btn-action btn-delete" (click)="deleteUsuario(i)" title="Eliminar usuario">🗑️</button>
-        </div>
-      </div>
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios; let i = index">
+            <td>{{ usuario.name }}</td>
+            <td>{{ usuario.role }}</td>
+            <td>
+              <span class="badge" [class.active]="usuario.status === 'Activo'" [class.inactive]="usuario.status === 'Inactivo'">
+                {{ usuario.status }}
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-action btn-edit" (click)="editUsuario(i)" title="Editar usuario">✏️</button>
+                <button class="btn-action btn-delete" (click)="deleteUsuario(i)" title="Eliminar usuario">🗑️</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 

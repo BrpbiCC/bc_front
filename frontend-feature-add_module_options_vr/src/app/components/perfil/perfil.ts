@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ThemeSwitcher } from '../theme-switcher/theme-switcher';
 import { FilterService } from '../../core/services/filter.service';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule, FormsModule, ThemeSwitcher],
+  imports: [CommonModule, FormsModule],
   templateUrl: './perfil.html',
   styleUrls: ['./perfil.css'],
 })
