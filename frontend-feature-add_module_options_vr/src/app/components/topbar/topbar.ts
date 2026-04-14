@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 import { TopbarMobile } from '../topbar-mobile/topbar-mobile';
+import { AuthService, type UserRole } from '../../core/services/auth.service';
+import { Subscription } from 'rxjs';
 
 interface Notification {
   id: number;
@@ -21,16 +23,34 @@ interface Notification {
   templateUrl: './topbar.html',
   styleUrls: ['./topbar.css'],
 })
-export class Topbar implements OnInit {
+export class Topbar implements OnInit, OnDestroy {
   showNotifications = false;
   showUserDropdown = false;
   showMobileMenu = false;
 
   notifications: Notification[] = [];
   isDarkTheme = false;
+  userName = 'Usuario';
+  userRoleLabel = 'Invitado';
+  userInitials = 'US';
+
+  private subscriptions = new Subscription();
+
+  private readonly roleLabels: Record<UserRole, string> = {
+    admin: 'Administrador',
+    support: 'Soporte',
+    'super-admin': 'Super Administrador',
+  };
+
+  private readonly roleFallbackNames: Record<UserRole, string> = {
+    admin: 'Administrador Principal',
+    support: 'Soporte Tecnico',
+    'super-admin': 'Administrador Global',
+  };
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +61,16 @@ export class Topbar implements OnInit {
     ];
 
     this.loadSavedTheme();
+    this.refreshUserInfo(this.authService.getRole());
+    this.subscriptions.add(
+      this.authService.role$.subscribe((role) => {
+        this.refreshUserInfo(role);
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   isActiveRoute(route: string): boolean {
@@ -81,6 +111,7 @@ export class Topbar implements OnInit {
 
   logout() {
     this.showUserDropdown = false;
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 
@@ -102,5 +133,43 @@ export class Topbar implements OnInit {
     } else {
       document.documentElement.removeAttribute('data-theme');
     }
+  }
+
+  private refreshUserInfo(role: UserRole | null): void {
+    const displayRole = role ? this.roleLabels[role] : 'Invitado';
+    const storedName = this.getStoredUserName();
+    const fallbackName = role ? this.roleFallbackNames[role] : 'Usuario';
+
+    this.userName = storedName || fallbackName;
+    this.userRoleLabel = displayRole;
+    this.userInitials = this.buildInitials(this.userName);
+  }
+
+  private getStoredUserName(): string {
+    const keys = ['userName', 'username', 'displayName', 'fullName', 'nombre'];
+    for (const key of keys) {
+      const value = localStorage.getItem(key);
+      if (value && value.trim()) {
+        return value.trim();
+      }
+    }
+    return '';
+  }
+
+  private buildInitials(name: string): string {
+    const parts = name
+      .split(/\s+/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+    if (parts.length === 0) {
+      return 'US';
+    }
+
+    if (parts.length === 1) {
+      return parts[0].slice(0, 2).toUpperCase();
+    }
+
+    return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
   }
 }

@@ -13,7 +13,7 @@
 
   <!-- ── Tarjetas métricas ────────────────────────────────────── -->
   <div class="metrics-grid">
-    <mat-card *ngFor="let m of metricas" class="metric-card mat-elevation-z0" [ngClass]="'border-' + m.color">
+    <mat-card *ngFor="let m of metricasVisibles" class="metric-card mat-elevation-z0" [ngClass]="'border-' + m.color">
       <mat-card-content class="metric-content">
         <div class="metric-top">
           <span class="metric-label">{{ m.label }}</span>

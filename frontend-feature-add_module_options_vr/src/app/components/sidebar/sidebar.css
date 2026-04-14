@@ -50,11 +50,11 @@
   display: none;
 }
 
-[data-theme='dark'] .logo-light {
+:host-context([data-theme='dark']) .logo-light {
   display: none;
 }
 
-[data-theme='dark'] .logo-dark {
+:host-context([data-theme='dark']) .logo-dark {
   display: block;
 }
 

@@ -37,6 +37,7 @@
 .mobile-header {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 1rem;
   padding: 1rem;
   border-bottom: 1px solid var(--border);
@@ -69,52 +70,83 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  flex: 1;
+}
+
+.mobile-user-profile .user-name {
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.mobile-user-profile .user-role {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.2;
 }
 
 .logout-btn {
   margin-left: auto;
-  align-self: start;
-  padding: 0.65rem 0.85rem;
-  border-radius: 999px;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px;
   border: 1px solid var(--border);
-  background: transparent;
+  background: linear-gradient(135deg, var(--surface-lowest), var(--surface));
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.logout-btn svg {
+  width: 14px;
+  height: 14px;
 }
 
 .logout-btn:hover {
+  transform: translateY(-1px);
   background-color: var(--hover-bg);
   border-color: var(--primary);
   color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
 }
 
 .mobile-theme-section {
-  padding: 0 1rem 1rem 1rem;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.75rem 1rem 1rem 1rem;
   border-bottom: 1px solid var(--border);
 }
 
 .mobile-theme-toggle {
-  width: 100%;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.8rem 1rem;
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  font-weight: 500;
+  justify-content: center;
+  padding: 0.45rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--text-muted);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .mobile-theme-toggle:hover {
-  background-color: var(--hover-bg);
-  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--hover-bg-light);
 }
 
 .theme-icon {
@@ -144,11 +176,6 @@
 
 .moon-icon {
   fill: currentColor;
-}
-
-.theme-label {
-  flex: 1;
-  text-align: left;
 }
 
 .close-btn {

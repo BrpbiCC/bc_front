@@ -803,13 +803,13 @@
     display: none !important;
   }
 
-  /* Hamburger visible y a la izquierda */
+  /* Hamburger visible y a la derecha */
   .mobile-menu-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 0;
-    order: 1;
+    margin-left: auto;
+    order: 20;
   }
 
   /* Filtros a la derecha del hamburger, ocupa el resto */

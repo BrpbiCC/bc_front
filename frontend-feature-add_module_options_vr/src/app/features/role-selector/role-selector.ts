@@ -134,12 +134,21 @@ import { AuthService, type UserRole } from '../../core/services/auth.service';
   ],
 })
 export class RoleSelector {
+  private readonly defaultNameByRole: Record<UserRole, string> = {
+    admin: 'Administrador Principal',
+    support: 'Soporte Técnico',
+    'super-admin': 'Administrador Global',
+  };
+
   constructor(
     private authService: AuthService,
     private router: Router,
   ) {}
 
   selectRole(role: UserRole): void {
+    if (!localStorage.getItem('userName')) {
+      localStorage.setItem('userName', this.defaultNameByRole[role]);
+    }
     this.authService.setRole(role);
     this.router.navigate(['/dashboard']);
   }

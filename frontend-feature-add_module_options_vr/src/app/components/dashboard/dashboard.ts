@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Chart, registerables } from 'chart.js';
 import { MapaLocalesComponent } from '../mapa-locales/mapa-locales.component';
+import { Subscription } from 'rxjs';
+import { AuthService, type UserRole } from '../../core/services/auth.service';
 
 Chart.register(...registerables);
 
@@ -42,7 +44,7 @@ export interface MetricaCard {
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
-export class Dashboard implements OnInit, AfterViewInit {
+export class Dashboard implements OnInit, AfterViewInit, OnDestroy {
 
   // ── Métricas resumen ──────────────────────────────────────────
   metricas: MetricaCard[] = [
@@ -53,6 +55,9 @@ export class Dashboard implements OnInit, AfterViewInit {
     { label: 'Locales',           valor: '63',    subvalor: '4 sin tenants',      icono: 'store',               color: 'info'     },
     { label: 'Usuarios',          valor: '5,902', subvalor: '↑ 4.7% este mes',       icono: 'group',               color: 'purple'   },
   ];
+  metricasVisibles: MetricaCard[] = [];
+
+  private readonly subscriptions = new Subscription();
 
   // ── Activos por estado ────────────────────────────────────────
   tenantsPorEstado = { activos: 874, inactivos: 287, mantenimiento: 123 };
@@ -91,7 +96,20 @@ export class Dashboard implements OnInit, AfterViewInit {
 
   private meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 
-  ngOnInit(): void {}
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.actualizarMetricasPorRol(this.authService.getRole());
+    this.subscriptions.add(
+      this.authService.role$.subscribe((role) => {
+        this.actualizarMetricasPorRol(role);
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -186,5 +204,10 @@ export class Dashboard implements OnInit, AfterViewInit {
       'Local':   'cat-local',
     };
     return map[cat] ?? '';
+  }
+
+  private actualizarMetricasPorRol(role: UserRole | null): void {
+    const esSuperAdmin = role === 'super-admin';
+    this.metricasVisibles = this.metricas.filter((m) => esSuperAdmin || m.label !== 'Total Tenants');
   }
 }

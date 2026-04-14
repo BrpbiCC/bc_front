@@ -54,6 +54,10 @@ export class Login implements OnInit {
   }
 
   onLogin() {
+    const displayName = this.usuario.trim();
+    if (displayName) {
+      localStorage.setItem('userName', displayName);
+    }
     this.router.navigate(['/dashboard']);
   }
 

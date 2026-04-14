@@ -142,11 +142,21 @@ import { Subscription } from 'rxjs';
   `,
   styles: [`
     .view-search-filters {
+      --surface-color: var(--surface-lowest, #ffffff);
+      --input-bg: var(--surface-lowest, #ffffff);
+      --text-color: var(--text-primary, #333333);
+      --border-color: var(--border, #e0e0e0);
+      --button-bg: var(--surface-low, #f8f9fa);
+      --primary-color: var(--primary, #007bff);
+      --accent-color: var(--error-alt, #dc3545);
+      --secondary-bg: var(--text-secondary, #6c757d);
+      --secondary-hover: var(--text-primary, #5a6268);
       display: flex;
       flex-direction: column;
       gap: 1rem;
       padding: 1rem;
       background: var(--surface-color, #ffffff);
+      color: var(--text-color, #333);
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       margin-bottom: 1rem;
@@ -182,6 +192,13 @@ import { Subscription } from 'rxjs';
       background: var(--input-bg, #ffffff);
       color: var(--text-color, #333);
       transition: border-color 0.2s ease;
+    }
+
+    .search-input::placeholder,
+    .filter-input::placeholder,
+    .filter-date::placeholder,
+    .filter-select:invalid {
+      color: var(--text-muted, #94a3b8);
     }
 
     .search-input:focus {
@@ -306,6 +323,11 @@ import { Subscription } from 'rxjs';
       transition: border-color 0.2s ease;
     }
 
+    .filter-select option {
+      background: var(--input-bg, #ffffff);
+      color: var(--text-color, #333);
+    }
+
     .filter-input:focus,
     .filter-select:focus,
     .filter-date:focus {
@@ -397,6 +419,28 @@ import { Subscription } from 'rxjs';
 
     .clear-filters-btn:hover {
       background: var(--secondary-hover, #5a6268);
+    }
+
+    :host-context([data-theme='dark']) .search-input,
+    :host-context([data-theme='dark']) .filter-input,
+    :host-context([data-theme='dark']) .filter-select,
+    :host-context([data-theme='dark']) .filter-date,
+    :host-context([data-theme='dark']) .multiselect-display,
+    :host-context([data-theme='dark']) .multiselect-dropdown,
+    :host-context([data-theme='dark']) .filters-panel {
+      background: var(--surface-lowest, #1E2A3A);
+      border-color: var(--border, #2E3E52);
+      color: var(--text-primary, #FFFFFF);
+    }
+
+    :host-context([data-theme='dark']) .filter-select option,
+    :host-context([data-theme='dark']) .multiselect-option {
+      background: var(--surface-lowest, #1E2A3A);
+      color: var(--text-primary, #FFFFFF);
+    }
+
+    :host-context([data-theme='dark']) .filter-date {
+      color-scheme: dark;
     }
 
     /* Responsive Design */

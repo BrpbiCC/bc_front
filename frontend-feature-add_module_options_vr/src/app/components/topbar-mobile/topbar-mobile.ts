@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService, type UserRole } from '../../core/services/auth.service';
 
 interface Notification {
   id: number;
@@ -18,13 +20,33 @@ interface Notification {
   templateUrl: './topbar-mobile.html',
   styleUrls: ['./topbar-mobile.css'],
 })
-export class TopbarMobile implements OnInit {
+export class TopbarMobile implements OnInit, OnDestroy {
   @Output() closeMenu = new EventEmitter<void>();
 
   showNotifications = false;
   isDarkTheme = false;
+  userName = 'Usuario';
+  userRoleLabel = 'Invitado';
+  userInitials = 'US';
 
-  constructor(private router: Router) {}
+  private subscriptions = new Subscription();
+
+  private readonly roleLabels: Record<UserRole, string> = {
+    admin: 'Administrador',
+    support: 'Soporte',
+    'super-admin': 'Super Administrador',
+  };
+
+  private readonly roleFallbackNames: Record<UserRole, string> = {
+    admin: 'Administrador Principal',
+    support: 'Soporte Técnico',
+    'super-admin': 'Administrador Global',
+  };
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {}
 
   notifications: Notification[] = [
     {
@@ -55,6 +77,17 @@ export class TopbarMobile implements OnInit {
 
   ngOnInit(): void {
     this.loadSavedTheme();
+
+    this.refreshUserInfo(this.authService.getRole());
+    this.subscriptions.add(
+      this.authService.role$.subscribe((role) => {
+        this.refreshUserInfo(role);
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   onClose(): void {
@@ -62,6 +95,7 @@ export class TopbarMobile implements OnInit {
   }
 
   logout(): void {
+    this.authService.logout();
     this.onClose();
     this.router.navigate(['/login']);
   }
@@ -96,5 +130,43 @@ export class TopbarMobile implements OnInit {
     } else {
       document.documentElement.removeAttribute('data-theme');
     }
+  }
+
+  private refreshUserInfo(role: UserRole | null): void {
+    const displayRole = role ? this.roleLabels[role] : 'Invitado';
+    const storedName = this.getStoredUserName();
+    const fallbackName = role ? this.roleFallbackNames[role] : 'Usuario';
+
+    this.userName = storedName || fallbackName;
+    this.userRoleLabel = displayRole;
+    this.userInitials = this.buildInitials(this.userName);
+  }
+
+  private getStoredUserName(): string {
+    const keys = ['userName', 'username', 'displayName', 'fullName', 'nombre'];
+    for (const key of keys) {
+      const value = localStorage.getItem(key);
+      if (value && value.trim()) {
+        return value.trim();
+      }
+    }
+    return '';
+  }
+
+  private buildInitials(name: string): string {
+    const parts = name
+      .split(/\s+/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+    if (parts.length === 0) {
+      return 'US';
+    }
+
+    if (parts.length === 1) {
+      return parts[0].slice(0, 2).toUpperCase();
+    }
+
+    return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
   }
 }

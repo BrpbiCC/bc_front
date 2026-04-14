@@ -25,7 +25,7 @@ export class Sidebar implements OnInit {
   @Output() collapseChange = new EventEmitter<boolean>();
 
   logoLight = '/imagenes/logos/FrioCheck.svg';
-  logoDark = '/imagenes/logos/FrioCheckDark.svg';
+  logoDark = '/imagenes/logos/FrioChekModoOscuro.svg';
   userRole: UserRole | null = null;
   navItems: NavItem[] = [];
   animationKey = 0;

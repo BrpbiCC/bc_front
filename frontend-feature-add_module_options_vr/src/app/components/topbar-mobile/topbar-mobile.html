@@ -12,17 +12,30 @@
   </div>
 
   <div class="mobile-user-profile">
-    <div class="avatar">AD</div>
+    <div class="avatar">{{ userInitials }}</div>
     <div class="mobile-user-info">
-      <span class="user-name">Administrador</span>
-      <span class="user-role">Soporte Nivel 2</span>
+      <span class="user-name">{{ userName }}</span>
+      <span class="user-role">{{ userRoleLabel }}</span>
     </div>
-    <button class="logout-btn" type="button" (click)="logout()">Cerrar sesión</button>
+    <button class="logout-btn" type="button" (click)="logout()" aria-label="Cerrar sesión">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <polyline points="16 17 21 12 16 7" />
+        <line x1="21" y1="12" x2="9" y2="12" />
+      </svg>
+      <span>Cerrar sesión</span>
+    </button>
   </div>
 
   <!-- Theme Section -->
   <div class="mobile-theme-section">
-    <button class="mobile-theme-toggle" (click)="toggleTheme()">
+    <button
+      class="mobile-theme-toggle"
+      (click)="toggleTheme()"
+      [attr.aria-label]="isDarkTheme ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
+      type="button"
+      title="Cambiar tema"
+    >
       <svg
         *ngIf="!isDarkTheme"
         class="theme-icon sun-icon"
@@ -46,7 +59,6 @@
       <svg *ngIf="isDarkTheme" class="theme-icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
-      <span class="theme-label">{{ isDarkTheme ? 'Tema claro' : 'Tema oscuro' }}</span>
     </button>
   </div>
 
