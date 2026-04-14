@@ -1,7 +1,14 @@
 import {
+  BreakpointObserver,
+  _animationsDisabled
+} from "./chunk-YH6FEKJU.js";
+import {
   coerceElement,
   coerceNumberProperty
 } from "./chunk-XDJFAY75.js";
+import {
+  Platform
+} from "./chunk-6J2BCLAR.js";
 import {
   _CdkPrivateStyleLoader,
   _VisuallyHiddenLoader,
@@ -9,18 +16,13 @@ import {
 } from "./chunk-VU66CZJ3.js";
 import {
   DomSanitizer
-} from "./chunk-EBS4FZEM.js";
-import {
-  BreakpointObserver,
-  _animationsDisabled
-} from "./chunk-G6TTWP5M.js";
-import {
-  Platform
-} from "./chunk-TRY3WWMX.js";
+} from "./chunk-7GKJOZ6B.js";
+import "./chunk-T3B2B732.js";
 import {
   BidiModule
 } from "./chunk-W2ENWPR6.js";
-import "./chunk-PBV62UI6.js";
+import "./chunk-EYDKQSYI.js";
+import "./chunk-HIVJPIJT.js";
 import {
   APP_ID,
   ChangeDetectionStrategy,

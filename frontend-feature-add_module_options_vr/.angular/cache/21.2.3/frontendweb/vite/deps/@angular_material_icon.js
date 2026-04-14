@@ -2,13 +2,16 @@ import {
   trustedHTMLFromString
 } from "./chunk-VU66CZJ3.js";
 import {
-  DomSanitizer,
+  DomSanitizer
+} from "./chunk-7GKJOZ6B.js";
+import {
   HttpClient
-} from "./chunk-EBS4FZEM.js";
+} from "./chunk-T3B2B732.js";
 import {
   BidiModule
 } from "./chunk-W2ENWPR6.js";
-import "./chunk-PBV62UI6.js";
+import "./chunk-EYDKQSYI.js";
+import "./chunk-HIVJPIJT.js";
 import {
   ChangeDetectionStrategy,
   Component,

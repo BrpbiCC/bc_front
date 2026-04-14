@@ -12,8 +12,7 @@
 }
 
 .sidebar.collapsed {
-  width: 72px;
-  min-width: 72px;
+  padding-top: 12px;
 }
 
 .sb-logo {
