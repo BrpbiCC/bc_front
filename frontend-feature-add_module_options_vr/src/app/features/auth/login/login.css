@@ -13,6 +13,70 @@
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 2.5rem 2rem;
+  position: relative;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--hover-bg);
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.theme-toggle-btn:hover .theme-icon {
+  color: var(--primary);
+}
+
+.sun-icon {
+  stroke: var(--text-secondary);
+}
+
+.moon-icon {
+  fill: var(--text-secondary);
+}
+
+.theme-toggle-btn:hover .sun-icon {
+  stroke: var(--primary);
+}
+
+.theme-toggle-btn:hover .moon-icon {
+  fill: var(--primary);
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .login-header {

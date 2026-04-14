@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -10,11 +10,14 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
 })
-export class Login {
+export class Login implements OnInit {
   usuario = '';
   password = '';
   logoLight = '/imagenes/logos/FrioCheck.svg';
   logoDark = '/imagenes/logos/FrioCheckDark.svg';
+
+  // Theme management
+  isDarkTheme = false;
 
   // Modal de recuperación
   showForgotModal = false;
@@ -25,6 +28,30 @@ export class Login {
   forgotRecoverySent = false;
 
   constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.loadSavedTheme();
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    this.applyTheme();
+    localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+  }
+
+  private loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    this.isDarkTheme = savedTheme === 'dark';
+    this.applyTheme();
+  }
+
+  private applyTheme() {
+    if (this.isDarkTheme) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  }
 
   onLogin() {
     this.router.navigate(['/dashboard']);
