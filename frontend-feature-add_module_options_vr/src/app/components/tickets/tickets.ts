@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilterService } from '../../core/services/filter.service';
+import { ViewSearchFiltersComponent } from '../view-search-filters/view-search-filters.component';
 
 @Component({
   selector: 'app-tickets',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ViewSearchFiltersComponent],
   templateUrl: './tickets.html',
   styleUrls: ['./tickets.css'],
 })

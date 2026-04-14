@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterService } from '../../core/services/filter.service';
+import { ViewSearchFiltersComponent } from '../view-search-filters/view-search-filters.component';
 
 export interface ActivoNFC {
   codigo: string;
@@ -46,7 +47,7 @@ const DATOS_ACTIVOS: ActivoNFC[] = [
 @Component({
   selector: 'app-activos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ViewSearchFiltersComponent],
   templateUrl: './activos.html',
   styleUrls: ['./activos.css'],
 })

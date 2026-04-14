@@ -1,11 +1,10 @@
 // Cambia esta línea del import
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { AuthService, type UserRole } from '../../core/services/auth.service';
 import { FilterService } from '../../core/services/filter.service';
-import { LogoComponent } from '../logo';
 
 interface NavItem {
   label?: string;
@@ -17,7 +16,7 @@ interface NavItem {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterModule, LogoComponent],
+  imports: [RouterModule, CommonModule],
   templateUrl: './sidebar.html',
   styleUrls: ['./sidebar.css'],
 })
@@ -25,6 +24,8 @@ export class Sidebar implements OnInit {
   @Input() collapsed = false;
   @Output() collapseChange = new EventEmitter<boolean>();
 
+  logoLight = '/imagenes/logos/FrioCheck.svg';
+  logoDark = '/imagenes/logos/FrioCheckDark.svg';
   userRole: UserRole | null = null;
   navItems: NavItem[] = [];
   animationKey = 0;

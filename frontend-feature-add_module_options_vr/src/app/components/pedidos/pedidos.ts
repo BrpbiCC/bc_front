@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterService } from '../../core/services/filter.service';
+import { ViewSearchFiltersComponent } from '../view-search-filters/view-search-filters.component';
 
 interface Pedido {
   orden: string;
@@ -17,7 +18,7 @@ interface Pedido {
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ViewSearchFiltersComponent],
   templateUrl: './pedidos.html',
   styleUrls: ['./pedidos.css']
 })
