@@ -7,11 +7,11 @@ import {
 import {
   HttpClient
 } from "./chunk-T3B2B732.js";
+import "./chunk-EYDKQSYI.js";
+import "./chunk-HIVJPIJT.js";
 import {
   BidiModule
 } from "./chunk-W2ENWPR6.js";
-import "./chunk-EYDKQSYI.js";
-import "./chunk-HIVJPIJT.js";
 import {
   ChangeDetectionStrategy,
   Component,

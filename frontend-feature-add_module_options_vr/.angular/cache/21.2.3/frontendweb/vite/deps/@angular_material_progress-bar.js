@@ -2,11 +2,11 @@ import {
   _getAnimationsState
 } from "./chunk-YH6FEKJU.js";
 import "./chunk-6J2BCLAR.js";
+import "./chunk-EYDKQSYI.js";
+import "./chunk-HIVJPIJT.js";
 import {
   BidiModule
 } from "./chunk-W2ENWPR6.js";
-import "./chunk-EYDKQSYI.js";
-import "./chunk-HIVJPIJT.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,

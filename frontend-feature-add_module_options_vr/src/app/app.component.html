@@ -4,7 +4,7 @@
 
 <ng-template #appShell>
   <div class="shell">
-    <app-sidebar *ngIf="!sidebarHidden" [collapsed]="sidebarCollapsed" (collapseChange)="sidebarCollapsed = $event"></app-sidebar>
+    <app-sidebar [collapsed]="sidebarCollapsed" (collapseChange)="sidebarCollapsed = $event"></app-sidebar>
     <div class="main" [class.sidebar-collapsed]="sidebarCollapsed">
       <app-topbar></app-topbar>
       <div class="content">
@@ -13,7 +13,7 @@
     </div>
     <button 
       class="sidebar-toggle-float" 
-      *ngIf="sidebarCollapsed && !sidebarHidden" 
+      *ngIf="sidebarCollapsed" 
       (click)="showSidebar()"
       title="Mostrar sidebar"
     >

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Sidebar } from './components/sidebar/sidebar';
@@ -14,7 +14,6 @@ import { FilterService } from './core/services/filter.service';
 })
 export class AppComponent implements OnInit {
   sidebarCollapsed = false;
-  sidebarHidden = false;
 
   constructor(
     private router: Router,
@@ -24,18 +23,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     document.documentElement.removeAttribute('data-theme');
     localStorage.setItem('theme', 'light');
-    this.checkScreenSize();
-  }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.checkScreenSize();
-  }
-
-  private checkScreenSize(): void {
-    const aspectRatio = window.innerWidth / window.innerHeight;
-    const width = window.innerWidth;
-    this.sidebarHidden = (width <= 1024 && aspectRatio > 0.75) || width <= 768;
   }
 
   toggleSidebar() {

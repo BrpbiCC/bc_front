@@ -1,28 +1,28 @@
 import {
-  _CdkPrivateStyleLoader,
-  _VisuallyHiddenLoader,
-  _setInnerHtml
-} from "./chunk-VU66CZJ3.js";
+  BreakpointObserver,
+  _animationsDisabled
+} from "./chunk-YH6FEKJU.js";
 import {
   coerceElement,
   coerceNumberProperty
 } from "./chunk-XDJFAY75.js";
 import {
-  DomSanitizer
-} from "./chunk-7GKJOZ6B.js";
-import "./chunk-T3B2B732.js";
-import {
-  BreakpointObserver,
-  _animationsDisabled
-} from "./chunk-YH6FEKJU.js";
-import {
   Platform
 } from "./chunk-6J2BCLAR.js";
 import {
-  BidiModule
-} from "./chunk-W2ENWPR6.js";
+  _CdkPrivateStyleLoader,
+  _VisuallyHiddenLoader,
+  _setInnerHtml
+} from "./chunk-VU66CZJ3.js";
+import {
+  DomSanitizer
+} from "./chunk-7GKJOZ6B.js";
+import "./chunk-T3B2B732.js";
 import "./chunk-EYDKQSYI.js";
 import "./chunk-HIVJPIJT.js";
+import {
+  BidiModule
+} from "./chunk-W2ENWPR6.js";
 import {
   APP_ID,
   ChangeDetectionStrategy,

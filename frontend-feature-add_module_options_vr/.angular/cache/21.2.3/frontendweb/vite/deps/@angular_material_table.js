@@ -9,12 +9,12 @@ import {
 import {
   Platform
 } from "./chunk-6J2BCLAR.js";
+import "./chunk-EYDKQSYI.js";
+import "./chunk-HIVJPIJT.js";
 import {
   BidiModule,
   Directionality
 } from "./chunk-W2ENWPR6.js";
-import "./chunk-EYDKQSYI.js";
-import "./chunk-HIVJPIJT.js";
 import {
   ApplicationRef,
   ChangeDetectionStrategy,
